@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tugboat privacy</title>
+<meta name="description" content="What Tugboat does with your mail and messages, what it sends to Google and to the AI model, and how to take its permissions away.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<style>
+/* Draft for tugboat.bot/privacy, from site/pub/src/content/docs/privacy.md (Nov 13). Not published. */
+:root { --bg: #f6f3ec; --panel: #fffdf8; --ink: #1d2733; --soft: #5b6573; --line: #e2dccf; --accent: #c8432b;
+	--font-head: 'Fraunces', Georgia, serif; --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442; --accent: #e8664c; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442; --accent: #e8664c; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 var(--font-body); }
+a { color: var(--accent); text-underline-offset: 2px; }
+.page { max-width: 44rem; margin: 0 auto; padding: 2.5rem 16px 3rem; }
+h1 { font: 700 2.2rem/1.1 var(--font-head); margin: 0.4rem 0 0.6rem; }
+h2 { font: 600 1.25rem/1.3 var(--font-head); margin: 2rem 0 0.5rem; }
+p, li { max-width: 40rem; }
+.meta, .back { color: var(--soft); font-size: 0.9rem; }
+.short { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 0.4rem 1.3rem; }
+.table { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); }
+code { font-size: 0.88em; }
+.blank { background: #fff3b0; color: #1d2733; padding: 0 0.2rem; }
+</style>
+</head>
+<body>
+<main class="page">
+<p class="back"><a href="./">← Tugboat</a></p>
+<h1>Privacy</h1>
+<p class="meta">Last updated: November 17, 2026.</p>
+
+<div class="short">
+<h2>The short version</h2>
+<ul>
+	<li>Tugboat runs on your own computer. We, the people who make it, run no server for it. We receive none of your data and cannot see your mailbox.</li>
+	<li>It sends an email only when you have read it on a card and pressed Send. It sends that exact text, once.</li>
+	<li>Google's permission is "Send email on your behalf", plus seeing which email address you signed in with. It cannot read your mail.</li>
+	<li>To write summaries and replies, Tugboat passes the text of your messages to the AI model you use (today Claude, by Anthropic), through your own account. That provider's terms apply.</li>
+	<li>You can take the permission away at any time, on Tugboat's page or in your Google account.</li>
+</ul>
+</div>
+
+<h2>Who is responsible for what</h2>
+<ul>
+	<li><b>Tugboat</b> is software you install and run on a computer of your own. Everything it keeps is in files on that computer.</li>
+	<li><b>We</b> write Tugboat. We do not operate it for you. We have no server it reports to, and no copy of anything it reads, writes or sends.</li>
+	<li><b>The AI model provider</b> (Anthropic, for Claude) processes the text Tugboat sends it, under your own account and the provider's own <a href="https://www.anthropic.com/legal/privacy">privacy policy</a>.</li>
+	<li><b>Google</b> delivers the emails you send and keeps them in your mailbox, under Google's own terms.</li>
+</ul>
+
+<h2>What it reads</h2>
+<p>Tugboat reads mail, WhatsApp and Signal messages that a separate program copies into a store on your computer. It reads them only; it does not mark anything as read, change anything or delete anything. To tell you what matters, keep your list and write replies, it sends the text it needs to the AI model.</p>
+<p>The Google permission described below is only for sending. It is not how Tugboat reads your mail.</p>
+
+<h2>What it asks Google for, and why</h2>
+<p>When you press Connect for a mailbox, Google asks you to allow two things:</p>
+<div class="table"><table>
+	<tr><th>Permission</th><th>What it allows</th><th>Why Tugboat needs it</th></tr>
+	<tr><td><b>Send email on your behalf</b> (<code>gmail.send</code>)</td><td>Sending an email from that address. It does not allow reading, searching or deleting mail</td><td>To send a reply you approved on a card</td></tr>
+	<tr><td><b>Your email address</b> (<code>openid</code>, <code>email</code>)</td><td>Seeing which address signed in, and nothing else of your account</td><td>To check that you connected the mailbox you meant to</td></tr>
+</table></div>
+
+<h2>When it sends</h2>
+<ul>
+	<li>Only after you have seen the message on a card, with the address it goes from, every recipient and the whole text, and pressed <b>Send</b>.</li>
+	<li>Exactly that text, once. If you edit it, your edited version is the one that is sent.</li>
+	<li>No AI agent in Tugboat holds the permission to send. The part that holds it, which has no AI in it, sends what you approved and nothing else.</li>
+</ul>
+
+<h2>What it keeps, and where</h2>
+<p>All on your computer:</p>
+<ul>
+	<li>Google's permission for each mailbox you connected, in a file of its own. It is never shown on the page, written to a log, or given to the AI model.</li>
+	<li>For each email it sent: Google's id for the message and for its thread, and a status number.</li>
+	<li>The cards, your list and the record of what Tugboat did, in plain files.</li>
+</ul>
+<p>Nothing of this is sent to us. Another program running under the same Windows user can read these files, as it can read any of that user's files. The sending permission lets such a program send mail as you, but not read it.</p>
+
+<h2>What it never does</h2>
+<ul>
+	<li>It does not sell, rent or share your data with anyone.</li>
+	<li>It does not use your data for advertising.</li>
+	<li>Nobody on our side reads your mail or messages; we have no access to them.</li>
+	<li>Nothing it receives from Google through the sending permission reaches the AI model: not the address you signed in with, not Google's ids for a sent message, not Google's answer when a send fails. The AI is told only that a reply was sent.</li>
+</ul>
+<p>Tugboat's use of information received from Google APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements.</p>
+
+<h2>How to take the permission away</h2>
+<ol>
+	<li><b>On Tugboat's page:</b> open the status panel and press <b>Disconnect</b> for the mailbox. That deletes Google's permission from your computer.</li>
+	<li><b>At Google:</b> go to <a href="https://myaccount.google.com/linkedapps">your Google Account's third-party connections</a>, signed in as that address. Choose Tugboat, then <b>See details</b>, <b>Remove access</b>, <b>Confirm</b>.</li>
+</ol>
+<p>The permission also ends by itself if you change your Google password, or if Tugboat does not use it for six months.</p>
+
+<h2>Questions</h2>
+<p>Write to <span class="blank">CONTACT_ADDRESS</span>.</p>
+
+<h2>Changes</h2>
+<p>This page is dated at the top. When what Tugboat does with your data changes, this page changes first.</p>
+</main>
+</body>
+</html>

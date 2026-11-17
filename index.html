@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tugboat</title>
+<meta name="description" content="Tugboat is an AI assistant on your own computer. It reads your mail and messages, tells you what matters, and does the work up to the last click. You press Send.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<style>
+/* Draft for tugboat.bot, Nov 17, 2026. Not published. One page, no build step. */
+:root {
+	--bg: #f6f3ec; --panel: #fffdf8; --ink: #1d2733; --soft: #5b6573; --line: #e2dccf;
+	--hull: #c8432b; --cabin: #f2e6c9; --sea: #2f6f8f; --accent: #c8432b; --accent-ink: #fff;
+	--font-head: 'Fraunces', Georgia, serif;
+	--font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
+	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
+	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--font-body); }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.page { max-width: 44rem; margin: 0 auto; padding: 3rem 16px 3rem; display: grid; gap: 2.2rem; }
+header { display: flex; align-items: center; gap: 0.7rem; font: 700 1.25rem var(--font-head); }
+header svg { width: 44px; height: 44px; }
+.hero { display: grid; gap: 1.2rem; }
+.hero svg { width: min(260px, 70%); height: auto; }
+h1 { margin: 0; font: 700 clamp(2.1rem, 6vw, 3.1rem)/1.08 var(--font-head); letter-spacing: -0.01em; text-wrap: balance; }
+h2 { margin: 0 0 0.4rem; font: 600 1.3rem/1.3 var(--font-head); }
+p { margin: 0; }
+.lede { font-size: 1.12rem; display: grid; gap: 0.8rem; }
+.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+.list li { padding-left: 1.4rem; position: relative; }
+.list li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--sea); }
+.story { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; display: grid; gap: 0.5rem; }
+.story p { color: var(--soft); }
+.cta { display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none; font: 600 1rem var(--font-body); padding: 0.8rem 1.4rem; border-radius: 10px; }
+.cta:hover { filter: brightness(1.08); }
+.cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.signup { display: grid; gap: 0.6rem; justify-items: start; }
+.small { color: var(--soft); font-size: 0.9rem; }
+.safe { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+.clip { margin: 0; display: grid; gap: 0.5rem; }
+.clip video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; background: #000; border-radius: 14px; border: 1px solid var(--line); }
+.clip figcaption { color: var(--soft); font-size: 0.82rem; line-height: 1.45; }
+.safe-text { display: grid; gap: 0.8rem; }
+.rights { font-size: 0.92rem; color: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0.6rem 0; }
+.rights b { color: var(--ink); font-weight: 600; }
+.y { color: #2f8a5a; } .n { color: var(--accent); }
+@media (max-width: 620px) { .safe { grid-template-columns: minmax(0, 1fr); } .clip { max-width: 15rem; } .safe-text { order: -1; } }
+footer { border-top: 1px solid var(--line); padding-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--soft); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main class="page">
+	<header>
+		<svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>
+		Tugboat
+	</header>
+
+	<section class="hero">
+		<svg viewBox="0 0 120 90" role="img" aria-label="A small red tugboat with a friendly face">
+			<defs>
+				<g id="tug">
+					<path d="M8 66 Q60 74 112 66" stroke="var(--sea)" stroke-width="4" fill="none" stroke-linecap="round"/>
+					<path d="M14 50 H106 L96 64 Q60 70 24 64 Z" fill="var(--hull)"/>
+					<rect x="38" y="28" width="38" height="22" rx="4" fill="var(--cabin)"/>
+					<rect x="62" y="12" width="9" height="16" rx="2" fill="var(--ink)"/>
+					<circle cx="50" cy="38" r="3" fill="var(--ink)"/>
+					<circle cx="64" cy="38" r="3" fill="var(--ink)"/>
+					<path d="M51 44 Q57 48 63 44" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<circle cx="24" cy="57" r="3.2" fill="none" stroke="var(--cabin)" stroke-width="2"/>
+				</g>
+			</defs>
+			<use href="#tug"/>
+		</svg>
+		<h1>Tugboat does the work. You press Send.</h1>
+		<div class="lede">
+			<p>An AI assistant that runs on your own computer, day and night. It reads your email, WhatsApp and Signal
+				as they come in, and tells you the few things that matter.</p>
+			<p>Then it gets the work ready, up to the last click:</p>
+		</div>
+		<ul class="list">
+			<li>the reply, already written</li>
+			<li>the form, already filled</li>
+			<li>the booking, already found</li>
+			<li>the bill, already chased</li>
+		</ul>
+		<p>It asks you only before it sends something in your name or spends your money. Everything else it just
+			does, and tells you what it did.</p>
+	</section>
+
+	<section class="safe">
+		<figure class="clip">
+			<video src="hack.mp4" controls playsinline preload="metadata" aria-label="A 26-second video: a planted instruction in a test email, and Tugboat flagging it instead of obeying"></video>
+			<figcaption>26 seconds. I planted three instructions in test emails. It followed none. The emails in the video are made up.</figcaption>
+		</figure>
+		<div class="safe-text">
+			<h2>It can't be talked into sending</h2>
+			<p>Nothing goes out in your name and nothing is paid without your tap. The part that reads your messages
+				cannot send anything.</p>
+			<p class="rights"><b>The part that reads:</b> Read <span class="y">✓</span> · Send <span class="n">✗</span> ·
+				Browse <span class="n">✗</span> · Write files <span class="n">✗</span></p>
+		</div>
+	</section>
+
+	<section class="story">
+		<h2>Why a tugboat?</h2>
+		<p>A great ship can cross an ocean but cannot dock itself. The last stretch belongs to a small, stubborn boat
+			that knows the harbour. It pushes the ship alongside, and the captain gives the final order.</p>
+		<p>Tugboat does that with your day. It brings everything alongside. You tie it off.</p>
+	</section>
+
+	<section>
+		<h2>Can I try it?</h2>
+		<p>Not yet. Today it runs on one PC, its maker's. A version you can install is being built now, Windows first.
+			It will be open source.</p>
+	</section>
+
+	<section class="signup">
+		<a class="cta" href="FORM_LINK">Tell me when I can try it</a>
+		<p class="small">One email when it is ready. Your address is not shared or used for anything else.</p>
+	</section>
+
+	<footer>
+		<span>Tugboat · tugboat.bot</span>
+		<a href="privacy.html">Privacy</a>
+		<a href="mailto:CONTACT_ADDRESS">Contact</a>
+	</footer>
+</main>
+</body>
+</html>
