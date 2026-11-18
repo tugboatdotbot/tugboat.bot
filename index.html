@@ -108,7 +108,8 @@ section { padding: 4rem 0; }
 .join input[type=email] { flex: 1 1 14rem; min-width: 0; font: 400 1rem var(--font-body); padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
 .join textarea { font: 400 1rem var(--font-body); padding: 0.6rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); resize: vertical; }
 .join label.q { font-size: 0.95rem; margin-top: 0.3rem; }
-.join select { font: 400 1rem var(--font-body); padding: 0.65rem 0.8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); max-width: 22rem; }
+.join select { flex: 1 1 12rem; min-width: 0; font: 400 1rem var(--font-body); padding: 0.65rem 0.8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.join .send { justify-self: start; }
 .join .done { font-weight: 600; color: var(--ok); }
 .sr, .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .promises { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; font-size: 0.9rem; color: var(--soft); margin: 0; padding: 0; list-style: none; }
@@ -231,17 +232,17 @@ footer .brand { margin-bottom: 0.5rem; }
 					<label class="sr" for="email-top">Your email</label>
 					<div class="row">
 						<input id="email-top" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
-						<button class="btn" type="submit">Get early access</button>
+						<label class="sr" for="want-top">What you'd like</label>
+						<select id="want-top" name="want">
+							<option value="">What you'd like (optional)</option>
+							<option>Set it up myself (free)</option>
+							<option>Set it up for me</option>
+							<option>A ready-made box</option>
+							<option>Not sure yet</option>
+						</select>
 					</div>
-					<label class="q" for="want-top">Which would you like?</label>
-					<select id="want-top" name="want">
-						<option value="">Choose one (optional)</option>
-						<option>Set it up myself (free)</option>
-						<option>Set it up for me</option>
-						<option>A ready-made box</option>
-						<option>Not sure yet</option>
-					</select>
 					<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+					<button class="btn send" type="submit">Get early access</button>
 					<p class="done" role="status" hidden>You're on the list. We'll write once, when it's ready.</p>
 				</form>
 			</div>
@@ -408,21 +409,21 @@ footer .brand { margin-bottom: 0.5rem; }
 			<p class="soft">One email when it's ready. Your address isn't shared or used for anything else.</p>
 			<form class="join" data-join>
 				<label class="sr" for="email-bottom">Your email</label>
-				<div class="row">
-					<input id="email-bottom" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
-					<button class="btn" type="submit">Get early access</button>
-				</div>
-				<label class="q" for="want-bottom">Which would you like?</label>
-				<select id="want-bottom" name="want">
-					<option value="">Choose one (optional)</option>
-					<option>Set it up myself (free)</option>
-					<option>Set it up for me</option>
-					<option>A ready-made box</option>
-					<option>Not sure yet</option>
-				</select>
+					<div class="row">
+						<input id="email-bottom" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+						<label class="sr" for="want-bottom">What you'd like</label>
+						<select id="want-bottom" name="want">
+							<option value="">What you'd like (optional)</option>
+							<option>Set it up myself (free)</option>
+							<option>Set it up for me</option>
+							<option>A ready-made box</option>
+							<option>Not sure yet</option>
+						</select>
+					</div>
 				<label class="q" for="slips">What slips through the cracks for you? <span class="soft">(optional)</span></label>
 				<textarea id="slips" name="slips" rows="2" placeholder="Replies I forget, bills, follow-ups..."></textarea>
 				<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+					<button class="btn send" type="submit">Get early access</button>
 				<p class="done" role="status" hidden>You're on the list. Thank you!</p>
 			</form>
 		</div>
@@ -470,7 +471,7 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 	if (f.slips) d.append('entry.1092229435', f.slips.value.trim())
 	try { await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: d }) } catch {}
 	f.querySelector('.row').hidden = true
-	f.querySelectorAll('label.q, textarea, select').forEach(x => x.hidden = true)
+	f.querySelectorAll('label.q, textarea, .send').forEach(x => x.hidden = true)
 	f.querySelector('.done').hidden = false
 }))
 
