@@ -108,6 +108,7 @@ section { padding: 4rem 0; }
 .join input[type=email] { flex: 1 1 14rem; min-width: 0; font: 400 1rem var(--font-body); padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
 .join textarea { font: 400 1rem var(--font-body); padding: 0.6rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); resize: vertical; }
 .join label.q { font-size: 0.95rem; margin-top: 0.3rem; }
+.join select { font: 400 1rem var(--font-body); padding: 0.65rem 0.8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); max-width: 22rem; }
 .join .done { font-weight: 600; color: var(--ok); }
 .sr, .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .promises { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; font-size: 0.9rem; color: var(--soft); margin: 0; padding: 0; list-style: none; }
@@ -222,7 +223,7 @@ footer .brand { margin-bottom: 0.5rem; }
 	<section class="hero">
 		<div class="wrap">
 			<div class="hero-text">
-				<span class="pill">Early access · first testers in December</span>
+				<span class="pill">Open source · planned for Thanksgiving week</span>
 				<h1>Tugboat does the work. You press Send.</h1>
 				<p class="lead">An AI assistant that runs on your own computer, day and night. It reads your email, WhatsApp
 					and Signal as they come in, tells you the few things that matter, and gets the work ready: replies
@@ -233,6 +234,14 @@ footer .brand { margin-bottom: 0.5rem; }
 						<input id="email-top" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
 						<button class="btn" type="submit">Get early access</button>
 					</div>
+					<label class="q" for="want-top">Which would you like?</label>
+					<select id="want-top" name="want">
+						<option value="">Choose one (optional)</option>
+						<option>Set it up myself (free)</option>
+						<option>Set it up for me</option>
+						<option>A ready-made box</option>
+						<option>Not sure yet</option>
+					</select>
 					<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 					<p class="done" role="status" hidden>You're on the list. We'll write once, when it's ready.</p>
 				</form>
@@ -326,16 +335,16 @@ footer .brand { margin-bottom: 0.5rem; }
 				<p class="soft">Tugboat is free. If you'd rather not be the technical one, we're planning help that takes care of it.</p>
 			</div>
 			<div class="ways">
-				<div class="way"><span class="tag go">First testers in December</span><h3>Do it yourself</h3>
+				<div class="way"><span class="tag go">Around Thanksgiving</span><h3>Do it yourself</h3>
 					<p>Free and open source. Install it on a computer of yours that stays on, connect your accounts, and you're set.</p></div>
-				<div class="way"><span class="tag">Planned</span><h3>Set up for you</h3>
+				<div class="way"><span class="tag go">Waitlist is live</span><h3>Set up for you</h3>
 					<p>We install it with you, connect your email and phone, and make sure the first morning works.</p></div>
 				<div class="way"><span class="tag">Planned</span><h3>A ready-made box</h3>
 					<p>A small, quiet computer with Tugboat already on it. Plug it in, scan two codes with your phone, connect Gmail.</p></div>
 				<div class="way"><span class="tag">Planned</span><h3>Care plan</h3>
 					<p>We keep it running: updates, fixes, a health check, and help when it's stuck. Built so we can't read your mail.</p></div>
 			</div>
-			<p class="small" style="margin-top:1.2rem">Prices come with the first testers. Tell us which you'd want when you join the list.</p>
+			<p class="small" style="margin-top:1.2rem">Prices come with the first set-ups. Tell us which you'd want when you join the list.</p>
 		</div>
 	</section>
 
@@ -349,7 +358,7 @@ footer .brand { margin-bottom: 0.5rem; }
 				<div><h3>A computer that stays on</h3>
 					<p>It works while the computer is on and awake: a desktop, or the ready-made box.</p>
 					<ul class="plats">
-						<li>Windows<span>first testers, December</span></li>
+						<li>Windows<span>around Thanksgiving</span></li>
 						<li>Mac<span>next</span></li>
 						<li>Linux<span>next</span></li>
 					</ul></div>
@@ -371,7 +380,7 @@ footer .brand { margin-bottom: 0.5rem; }
 					<li><span class="when">Nov 16</span><span>Safety test: three instructions hidden in test emails. It followed none.</span></li>
 					<li><span class="when">Nov 15</span><span>Every task shows the message it came from, and its next step as one button.</span></li>
 				</ul>
-				<p class="small">The code isn't public yet. It will be published on GitHub in the coming days.</p>
+				<p class="small">The code isn't public yet. We plan to publish it on GitHub around Thanksgiving.</p>
 			</div>
 			<div class="about" id="about">
 				<p class="kicker">About</p>
@@ -401,11 +410,11 @@ footer .brand { margin-bottom: 0.5rem; }
 			<details><summary>Does my computer have to stay on?</summary>
 				<p>Yes. Tugboat works while the computer is on and awake, so a desktop that stays on works best. A laptop that sleeps will pause it. That's why we're planning a small ready-made box.</p></details>
 			<details><summary>Mac or Linux?</summary>
-				<p>Windows comes first. The installer already runs on Mac and Linux in our tests; those follow after the first testers.</p></details>
+				<p>Windows comes first. The installer already runs on Mac and Linux in our tests; those follow soon after.</p></details>
 			<details><summary>Is the code public?</summary>
-				<p>Not yet. It will be published on GitHub in the coming days, free and open source.</p></details>
+				<p>Not yet. We plan to publish it on GitHub around Thanksgiving, free and open source.</p></details>
 			<details><summary>When can I try it?</summary>
-				<p>First testers start in early December, on Windows. Join the list and you'll get one email when it's ready.</p></details>
+				<p>To set it up yourself: the open-source version is planned for around Thanksgiving, on Windows. To have it set up for you: the waitlist is live. Join the list below and pick which you'd like.</p></details>
 		</div>
 	</section>
 
@@ -420,6 +429,14 @@ footer .brand { margin-bottom: 0.5rem; }
 					<input id="email-bottom" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
 					<button class="btn" type="submit">Get early access</button>
 				</div>
+				<label class="q" for="want-bottom">Which would you like?</label>
+				<select id="want-bottom" name="want">
+					<option value="">Choose one (optional)</option>
+					<option>Set it up myself (free)</option>
+					<option>Set it up for me</option>
+					<option>A ready-made box</option>
+					<option>Not sure yet</option>
+				</select>
 				<label class="q" for="slips">What slips through the cracks for you? <span class="soft">(optional)</span></label>
 				<textarea id="slips" name="slips" rows="2" placeholder="Replies I forget, bills, follow-ups..."></textarea>
 				<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -466,10 +483,11 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 	if (f.website.value) return
 	const d = new FormData()
 	d.append('entry.1082021681', f.email.value.trim())
+	if (f.want && f.want.value) d.append('entry.2037070946', f.want.value)
 	if (f.slips) d.append('entry.1092229435', f.slips.value.trim())
 	try { await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: d }) } catch {}
 	f.querySelector('.row').hidden = true
-	f.querySelectorAll('label.q, textarea').forEach(x => x.hidden = true)
+	f.querySelectorAll('label.q, textarea, select').forEach(x => x.hidden = true)
 	f.querySelector('.done').hidden = false
 }))
 
