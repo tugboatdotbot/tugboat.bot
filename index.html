@@ -475,7 +475,7 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 
 // Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
 // Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
-// No cookies, no IP address, nothing personal. Skipped for automated browsers and search-engine robots.
+// No cookies, no IP address, nothing personal. Skipped for robots (see below).
 ;(() => {
 	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
 	let visitor = ''
@@ -488,7 +488,14 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 	d.append('entry.1310039105', source || 'direct')
 	d.append('entry.1872699160', visitor || 'unknown')
 	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
-	try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
+	// previewers load the page and run it, but never do these, so they are not counted.
+	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const send = () => {
+		events.forEach(e => removeEventListener(e, send, true))
+		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	}
+	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
 })()
 </script>
 </body>
