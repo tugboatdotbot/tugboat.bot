@@ -475,9 +475,9 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 
 // Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
 // Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
-// No cookies, no IP address, nothing personal. Skipped for automated browsers.
+// No cookies, no IP address, nothing personal. Skipped for automated browsers and search-engine robots.
 ;(() => {
-	if (navigator.webdriver) return
+	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
 	let visitor = ''
 	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
 	const q = new URLSearchParams(location.search)
