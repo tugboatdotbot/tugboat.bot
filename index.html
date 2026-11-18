@@ -3,139 +3,493 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tugboat</title>
-<meta name="description" content="Tugboat is an AI assistant on your own computer. It reads your mail and messages, tells you what matters, and does the work up to the last click. You press Send.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%E2%9A%93%3C/text%3E%3C/svg%3E">
+<title>Tugboat: the AI assistant that does the work. You press Send.</title>
+<meta name="description" content="Tugboat is an AI assistant that runs on your own computer. It reads your email, WhatsApp and Signal, tells you what matters, and gets the work ready up to the last click. You press Send. Free and open source.">
+<link rel="canonical" href="https://tugboat.bot/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tugboat">
+<meta property="og:url" content="https://tugboat.bot/">
+<meta property="og:title" content="Tugboat does the work. You press Send.">
+<meta property="og:description" content="An AI assistant on your own computer. It reads your email and messages and gets the work ready, up to the last click.">
+<meta property="og:image" content="https://tugboat.bot/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A small red tugboat and the words: Tugboat does the work. You press Send.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tugboat does the work. You press Send.">
+<meta name="twitter:description" content="An AI assistant on your own computer. It reads your email and messages and gets the work ready, up to the last click.">
+<meta name="twitter:image" content="https://tugboat.bot/og.png">
+<meta name="theme-color" content="#f6f3ec">
+<meta name="google-site-verification" content="XdHv9OWRw_slfJ444UJZU1bxLJ0_u1eJFPotjZLQtPg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<script type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"name": "Tugboat",
+	"url": "https://tugboat.bot/",
+	"logo": "https://tugboat.bot/apple-touch-icon.png",
+	"email": "hello@tugboat.bot",
+	"description": "An open-source AI assistant that runs on your own computer, reads your email and messages, and gets the work ready up to the last click.",
+	"sameAs": [
+		"https://www.youtube.com/@tugboatdotbot",
+		"https://www.instagram.com/tugboat.bot/",
+		"https://www.linkedin.com/company/tugboatdotbot",
+		"https://www.facebook.com/profile.php?id=61596394393035",
+		"https://bsky.app/profile/tugboat.bot",
+		"https://github.com/tugboatdotbot"
+	]
+}
+</script>
 <style>
-/* Draft for tugboat.bot, Nov 17, 2026. Not published. One page, no build step. */
 :root {
 	--bg: #f6f3ec; --panel: #fffdf8; --ink: #1d2733; --soft: #5b6573; --line: #e2dccf;
-	--hull: #c8432b; --cabin: #f2e6c9; --sea: #2f6f8f; --accent: #c8432b; --accent-ink: #fff;
+	--hull: #c8432b; --cabin: #f2e6c9; --sea: #2f6f8f; --accent: #c8432b; --accent-ink: #fff; --ok: #2f8a5a;
 	--font-head: 'Fraunces', Georgia, serif;
 	--font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
 	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
-	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; color-scheme: dark;
+	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
 } }
 :root[data-theme="dark"] {
 	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
-	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; color-scheme: dark;
+	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--font-body); }
 a { color: var(--accent); text-underline-offset: 2px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.page { max-width: 44rem; margin: 0 auto; padding: 3rem 16px 3rem; display: grid; gap: 2.2rem; }
-header { display: flex; align-items: center; gap: 0.7rem; font: 700 1.25rem var(--font-head); }
-header svg { width: 44px; height: 44px; }
-.hero { display: grid; gap: 1.2rem; }
-.hero svg { width: min(260px, 70%); height: auto; }
-h1 { margin: 0; font: 700 clamp(2.1rem, 6vw, 3.1rem)/1.08 var(--font-head); letter-spacing: -0.01em; text-wrap: balance; }
-h2 { margin: 0 0 0.4rem; font: 600 1.3rem/1.3 var(--font-head); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 p { margin: 0; }
-.lede { font-size: 1.12rem; display: grid; gap: 0.8rem; }
-.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
-.list li { padding-left: 1.4rem; position: relative; }
-.list li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--sea); }
-.story { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; display: grid; gap: 0.5rem; }
-.story p { color: var(--soft); }
-.cta { display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none; font: 600 1rem var(--font-body); padding: 0.8rem 1.4rem; border-radius: 10px; }
-.cta:hover { filter: brightness(1.08); }
-.cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.signup { display: grid; gap: 0.6rem; justify-items: start; }
-.small { color: var(--soft); font-size: 0.9rem; }
-.safe { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
-.clip { margin: 0; display: grid; gap: 0.5rem; }
-.clip video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; background: #000; border-radius: 14px; border: 1px solid var(--line); }
-.clip figcaption { color: var(--soft); font-size: 0.82rem; line-height: 1.45; }
-.safe-text { display: grid; gap: 0.8rem; }
-.rights { font-size: 0.92rem; color: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0.6rem 0; }
-.rights b { color: var(--ink); font-weight: 600; }
-.y { color: #2f8a5a; } .n { color: var(--accent); }
-@media (max-width: 620px) { .safe { grid-template-columns: minmax(0, 1fr); } .clip { max-width: 15rem; } .safe-text { order: -1; } }
-footer { border-top: 1px solid var(--line); padding-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--soft); font-size: 0.9rem; }
+h1, h2, h3 { margin: 0; font-family: var(--font-head); text-wrap: balance; }
+h1 { font-weight: 700; font-size: clamp(2.3rem, 5.6vw, 3.6rem); line-height: 1.05; letter-spacing: -0.015em; }
+h2 { font-weight: 700; font-size: clamp(1.6rem, 3.6vw, 2.2rem); line-height: 1.15; letter-spacing: -0.01em; }
+h3 { font-weight: 600; font-size: 1.15rem; line-height: 1.3; }
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 16px; }
+.narrow { max-width: 46rem; }
+section { padding: 4rem 0; }
+.kicker { font: 600 0.78rem/1 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--sea); margin-bottom: 0.8rem; }
+.lead { font-size: 1.15rem; color: var(--soft); }
+.soft { color: var(--soft); }
+.small { font-size: 0.9rem; color: var(--soft); }
+.sec-head { display: grid; gap: 0.7rem; max-width: 40rem; margin-bottom: 2.2rem; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; gap: 1.5rem; height: 3.8rem; }
+.brand { display: flex; align-items: center; gap: 0.55rem; font: 700 1.2rem var(--font-head); color: var(--ink); text-decoration: none; }
+.brand svg { width: 38px; height: 38px; }
+.bar nav { display: flex; gap: 1.3rem; margin-left: auto; font-size: 0.95rem; }
+.bar nav a { color: var(--soft); text-decoration: none; }
+.bar nav a:hover { color: var(--ink); }
+.btn { display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none; border: 0; cursor: pointer; font: 600 0.98rem var(--font-body); padding: 0.75rem 1.2rem; border-radius: 10px; white-space: nowrap; }
+.btn:hover { filter: brightness(1.07); }
+.bar .btn { padding: 0.55rem 0.95rem; font-size: 0.9rem; }
+@media (max-width: 760px) { .bar nav { display: none; } .bar .btn { margin-left: auto; } }
+
+/* Hero */
+.hero { padding: 3.5rem 0 3rem; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 3rem; align-items: center; }
+.hero-text { display: grid; gap: 1.3rem; }
+.pill { justify-self: start; font-size: 0.85rem; font-weight: 600; color: var(--sea); border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 0.3rem 0.8rem; }
+.hero-clip { justify-self: center; width: min(19rem, 100%); }
+.hero-clip video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; background: #000; border-radius: 22px; box-shadow: 0 24px 60px -24px rgba(29, 39, 51, 0.45); }
+.hero-clip p { margin-top: 0.7rem; text-align: center; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; } .hero-clip { width: min(16rem, 80%); } }
+
+/* Sign-up form */
+.join { display: grid; gap: 0.6rem; max-width: 34rem; }
+.join .row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.join input[type=email] { flex: 1 1 14rem; min-width: 0; font: 400 1rem var(--font-body); padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.join textarea { font: 400 1rem var(--font-body); padding: 0.6rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); resize: vertical; }
+.join label.q { font-size: 0.95rem; margin-top: 0.3rem; }
+.join .done { font-weight: 600; color: var(--ok); }
+.sr, .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.promises { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; font-size: 0.9rem; color: var(--soft); margin: 0; padding: 0; list-style: none; }
+.promises li::before { content: "✓ "; color: var(--ok); font-weight: 600; }
+
+/* Works-with strip */
+.strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.2rem 0; }
+.strip .wrap { display: flex; flex-wrap: wrap; gap: 0.6rem 2.4rem; justify-content: center; font-size: 0.95rem; color: var(--soft); }
+.strip b { color: var(--ink); font-weight: 600; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; counter-reset: step; }
+.steps li { list-style: none; display: grid; gap: 0.5rem; align-content: start; }
+.steps li::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--cabin); color: #1d2733; font: 700 1rem var(--font-head); }
+.steps ol { margin: 0; padding: 0; }
+@media (max-width: 760px) { .steps { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; } }
+
+/* Clips */
+.reel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; }
+.clip { margin: 0; display: grid; gap: 0.6rem; align-content: start; }
+.clip video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; background: #000; border-radius: 16px; }
+.clip figcaption { font-size: 0.93rem; color: var(--soft); line-height: 1.5; }
+.clip figcaption b { color: var(--ink); }
+.when { display: block; font: 600 0.75rem/1.4 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--sea); margin-bottom: 0.15rem; }
+@media (max-width: 760px) { .reel { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 68%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; } .reel .clip { scroll-snap-align: start; } }
+
+/* Safety */
+.alt { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.safe { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 3rem; align-items: center; }
+.checks { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+.checks li { display: grid; gap: 0.2rem; padding-left: 1.9rem; position: relative; }
+.checks li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--ok); font-weight: 700; font-size: 1.1rem; }
+.checks p { color: var(--soft); }
+@media (max-width: 760px) { .safe { grid-template-columns: minmax(0, 1fr); gap: 2rem; } .safe .clip { max-width: 15rem; } }
+
+/* Ways to get it */
+.ways { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.2rem; }
+.way { border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem; display: grid; gap: 0.55rem; align-content: start; background: var(--bg); }
+.way p { color: var(--soft); font-size: 0.95rem; }
+.tag { justify-self: start; font: 600 0.72rem/1 var(--font-body); letter-spacing: 0.05em; text-transform: uppercase; padding: 0.35rem 0.55rem; border-radius: 6px; background: var(--cabin); color: #1d2733; }
+.tag.go { background: var(--ok); color: #fff; }
+@media (max-width: 980px) { .ways { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .ways { grid-template-columns: minmax(0, 1fr); } }
+
+/* Needs */
+.needs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.needs > div { display: grid; gap: 0.5rem; align-content: start; }
+.needs p { color: var(--soft); }
+.plats { display: grid; gap: 0.3rem; margin: 0.3rem 0 0; padding: 0; list-style: none; font-weight: 600; }
+.plats span { font-weight: 400; font-size: 0.85rem; color: var(--soft); margin-left: 0.4rem; }
+@media (max-width: 760px) { .needs { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; } }
+
+/* Progress and about */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3.5rem; }
+.two > div { display: grid; gap: 1rem; align-content: start; }
+.log { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.9rem; }
+.log li { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 0.8rem; }
+.log .when { margin: 0.15rem 0 0; }
+.about p { color: var(--soft); }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); gap: 3rem; } }
+
+/* Questions */
+details { border-top: 1px solid var(--line); padding: 0.95rem 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; font-weight: 600; list-style-position: outside; }
+details p { margin-top: 0.55rem; color: var(--soft); }
+
+/* Final call */
+.final { text-align: left; }
+.final .wrap { display: grid; gap: 1.2rem; }
+
+footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: 0.92rem; color: var(--soft); }
+footer .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 2rem; }
+footer h3 { font: 600 0.8rem var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.6rem; }
+footer ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.35rem; }
+footer a { color: var(--soft); text-decoration: none; }
+footer a:hover { color: var(--ink); text-decoration: underline; }
+footer .brand { margin-bottom: 0.5rem; }
+@media (max-width: 640px) { footer .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } footer .wrap > div:first-child { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
-<main class="page">
-	<header>
-		<svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>
-		Tugboat
-	</header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+	<defs>
+		<g id="tug">
+			<path d="M8 66 Q60 74 112 66" stroke="var(--sea)" stroke-width="4" fill="none" stroke-linecap="round"/>
+			<path d="M14 50 H106 L96 64 Q60 70 24 64 Z" fill="var(--hull)"/>
+			<rect x="38" y="28" width="38" height="22" rx="4" fill="var(--cabin)"/>
+			<rect x="62" y="12" width="9" height="16" rx="2" fill="var(--ink)"/>
+			<circle cx="50" cy="38" r="3" fill="#1d2733"/>
+			<circle cx="64" cy="38" r="3" fill="#1d2733"/>
+			<path d="M51 44 Q57 48 63 44" stroke="#1d2733" stroke-width="2" fill="none" stroke-linecap="round"/>
+			<circle cx="24" cy="57" r="3.2" fill="none" stroke="var(--cabin)" stroke-width="2"/>
+		</g>
+	</defs>
+</svg>
 
+<header class="bar">
+	<div class="wrap">
+		<a class="brand" href="#top" aria-label="Tugboat home"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
+		<nav aria-label="Sections">
+			<a href="#how">How it works</a>
+			<a href="#safety">Safety</a>
+			<a href="#ways">Ways to get it</a>
+			<a href="#questions">Questions</a>
+		</nav>
+		<a class="btn" href="#join">Join the list</a>
+	</div>
+</header>
+
+<main id="top">
 	<section class="hero">
-		<svg viewBox="0 0 120 90" role="img" aria-label="A small red tugboat with a friendly face">
-			<defs>
-				<g id="tug">
-					<path d="M8 66 Q60 74 112 66" stroke="var(--sea)" stroke-width="4" fill="none" stroke-linecap="round"/>
-					<path d="M14 50 H106 L96 64 Q60 70 24 64 Z" fill="var(--hull)"/>
-					<rect x="38" y="28" width="38" height="22" rx="4" fill="var(--cabin)"/>
-					<rect x="62" y="12" width="9" height="16" rx="2" fill="var(--ink)"/>
-					<circle cx="50" cy="38" r="3" fill="var(--ink)"/>
-					<circle cx="64" cy="38" r="3" fill="var(--ink)"/>
-					<path d="M51 44 Q57 48 63 44" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
-					<circle cx="24" cy="57" r="3.2" fill="none" stroke="var(--cabin)" stroke-width="2"/>
-				</g>
-			</defs>
-			<use href="#tug"/>
-		</svg>
-		<h1>Tugboat does the work. You press Send.</h1>
-		<div class="lede">
-			<p>An AI assistant that runs on your own computer, day and night. It reads your email, WhatsApp and Signal
-				as they come in, and tells you the few things that matter.</p>
-			<p>Then it gets the work ready, up to the last click:</p>
-		</div>
-		<ul class="list">
-			<li>the reply, already written</li>
-			<li>the form, already filled</li>
-			<li>the booking, already found</li>
-			<li>the bill, already chased</li>
-		</ul>
-		<p>It asks you only before it sends something in your name or spends your money. Everything else it just
-			does, and tells you what it did.</p>
-	</section>
-
-	<section class="safe">
-		<figure class="clip">
-			<video src="hack.mp4" controls playsinline preload="metadata" aria-label="A 26-second video: a planted instruction in a test email, and Tugboat flagging it instead of obeying"></video>
-			<figcaption>26 seconds. I planted three instructions in test emails. It followed none. The emails in the video are made up.</figcaption>
-		</figure>
-		<div class="safe-text">
-			<h2>It can't be talked into sending</h2>
-			<p>Nothing goes out in your name and nothing is paid without your tap. The part that reads your messages
-				cannot send anything.</p>
-			<p class="rights"><b>The part that reads:</b> Read <span class="y">✓</span> · Send <span class="n">✗</span> ·
-				Browse <span class="n">✗</span> · Write files <span class="n">✗</span></p>
+		<div class="wrap">
+			<div class="hero-text">
+				<span class="pill">Early access · first testers in December</span>
+				<h1>Tugboat does the work. You press Send.</h1>
+				<p class="lead">An AI assistant that runs on your own computer, day and night. It reads your email, WhatsApp
+					and Signal as they come in, tells you the few things that matter, and gets the work ready: replies
+					written, follow-ups drafted, web forms filled in, up to the last button.</p>
+				<form class="join" data-join>
+					<label class="sr" for="email-top">Your email</label>
+					<div class="row">
+						<input id="email-top" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+						<button class="btn" type="submit">Get early access</button>
+					</div>
+					<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+					<p class="done" role="status" hidden>You're on the list. We'll write once, when it's ready.</p>
+				</form>
+				<ul class="promises">
+					<li>Nothing goes out without your tap</li>
+					<li>Your messages stay on your computer</li>
+					<li>Free and open source</li>
+				</ul>
+			</div>
+			<figure class="hero-clip" style="margin:0">
+				<video src="morning.mp4" poster="morning.jpg" autoplay muted loop playsinline preload="metadata"
+					aria-label="A 30-second video: a flood of messages, and the morning list with three things that matter, each with the work done"></video>
+				<p class="small">A morning with Tugboat. Names and messages are made up.</p>
+			</figure>
 		</div>
 	</section>
 
-	<section class="story">
-		<h2>Why a tugboat?</h2>
-		<p>A great ship can cross an ocean but cannot dock itself. The last stretch belongs to a small, stubborn boat
-			that knows the harbour. It pushes the ship alongside, and the captain gives the final order.</p>
-		<p>Tugboat does that with your day. It brings everything alongside. You tie it off.</p>
+	<div class="strip">
+		<div class="wrap">
+			<span>Reads <b>Gmail</b>, <b>WhatsApp</b> and <b>Signal</b></span>
+			<span>Runs on <b>your own computer</b></span>
+			<span>Uses <b>your own AI account</b></span>
+			<span>Use it from <b>your phone</b></span>
+		</div>
+	</div>
+
+	<section id="how">
+		<div class="wrap">
+			<div class="sec-head">
+				<p class="kicker">How it works</p>
+				<h2>Every message read. Only what matters reaches you, with the work already done.</h2>
+			</div>
+			<ol class="steps">
+				<li><h3>It reads everything as it arrives</h3>
+					<p class="soft">Email, WhatsApp and Signal, day and night, on your own computer. Newsletters, receipts and
+						noise stay out of your way.</p></li>
+				<li><h3>It gets the work ready</h3>
+					<p class="soft">A reply written for you. A follow-up for someone who never answered. A form on a
+						website filled in, stopped at the last button.</p></li>
+				<li><h3>You check it and tap Send</h3>
+					<p class="soft">Your morning list shows the few things that matter, each one ready. When a website needs a
+						code, it asks you on your phone and carries on.</p></li>
+			</ol>
+		</div>
 	</section>
 
-	<section>
-		<h2>Can I try it?</h2>
-		<p>Not yet. Today it runs on one PC, its maker's. A version you can install is being built now, Windows first.
-			It will be open source.</p>
+	<section id="see" style="padding-top:0">
+		<div class="wrap">
+			<div class="sec-head">
+				<p class="kicker">See it work</p>
+				<h2>A day with Tugboat</h2>
+				<p class="small">Short clips. The people, sites and messages in them are made up.</p>
+			</div>
+			<div class="reel">
+				<figure class="clip"><video src="morning.mp4" poster="morning.jpg" controls playsinline preload="none"></video>
+					<figcaption><span class="when">7:00 am</span><b>Your morning.</b> Hundreds of messages, and the 3 that matter, with the work already done.</figcaption></figure>
+				<figure class="clip"><video src="step-in.mp4" poster="step-in.jpg" controls playsinline preload="none"></video>
+					<figcaption><span class="when">Midday</span><b>Step in from your phone.</b> A site wants a code: it pings you, you type it, it carries on.</figcaption></figure>
+				<figure class="clip"><video src="nudge.mp4" poster="nudge.jpg" controls playsinline preload="none"></video>
+					<figcaption><span class="when">Three days later</span><b>The nudge.</b> Someone never answered. A follow-up is written and waiting for your tap.</figcaption></figure>
+			</div>
+		</div>
 	</section>
 
-	<section class="signup">
-		<a class="cta" href="mailto:hello@tugboat.bot?subject=Tell%20me%20when%20I%20can%20try%20Tugboat">Tell me when I can try it</a>
-		<p class="small">One email when it is ready. Your address is not shared or used for anything else.</p>
+	<section id="safety" class="alt">
+		<div class="wrap safe">
+			<figure class="clip">
+				<video src="hack.mp4" poster="hack.jpg" controls playsinline preload="none" aria-label="A 26-second video: a planted instruction in a test email, and Tugboat flagging it instead of obeying"></video>
+				<figcaption>Three instructions hidden in test emails. It followed none.</figcaption>
+			</figure>
+			<div>
+				<div class="sec-head">
+					<p class="kicker">Safe by design</p>
+					<h2>It can't be talked into sending.</h2>
+				</div>
+				<ul class="checks">
+					<li><b>You press Send.</b><p>Nothing goes out in your name and nothing is paid without your tap.</p></li>
+					<li><b>The reader can't act.</b><p>The part that reads your messages can read, and nothing else: it can't send, browse or write files.</p></li>
+					<li><b>Tricks get flagged.</b><p>An email that tries to give it orders is shown to you as suspicious, not obeyed.</p></li>
+					<li><b>No Tugboat server.</b><p>Your mail and messages stay on your computer. We never see them.</p></li>
+				</ul>
+			</div>
+		</div>
 	</section>
 
-	<footer>
-		<span>Tugboat · tugboat.bot</span>
-		<a href="privacy.html">Privacy</a>
-		<a href="mailto:hello@tugboat.bot">Contact</a>
-	</footer>
+	<section id="ways">
+		<div class="wrap">
+			<div class="sec-head">
+				<p class="kicker">Ways to get it</p>
+				<h2>Set it up yourself, or let us do it.</h2>
+				<p class="soft">Tugboat is free. If you'd rather not be the technical one, we're planning help that takes care of it.</p>
+			</div>
+			<div class="ways">
+				<div class="way"><span class="tag go">First testers in December</span><h3>Do it yourself</h3>
+					<p>Free and open source. Install it on a computer of yours that stays on, connect your accounts, and you're set.</p></div>
+				<div class="way"><span class="tag">Planned</span><h3>Set up for you</h3>
+					<p>We install it with you, connect your email and phone, and make sure the first morning works.</p></div>
+				<div class="way"><span class="tag">Planned</span><h3>A ready-made box</h3>
+					<p>A small, quiet computer with Tugboat already on it. Plug it in, scan two codes with your phone, connect Gmail.</p></div>
+				<div class="way"><span class="tag">Planned</span><h3>Care plan</h3>
+					<p>We keep it running: updates, fixes, a health check, and help when it's stuck. Built so we can't read your mail.</p></div>
+			</div>
+			<p class="small" style="margin-top:1.2rem">Prices come with the first testers. Tell us which you'd want when you join the list.</p>
+		</div>
+	</section>
+
+	<section id="needs" class="alt">
+		<div class="wrap">
+			<div class="sec-head">
+				<p class="kicker">What you'll need</p>
+				<h2>Three things.</h2>
+			</div>
+			<div class="needs">
+				<div><h3>A computer that stays on</h3>
+					<p>It works while the computer is on and awake: a desktop, or the ready-made box.</p>
+					<ul class="plats">
+						<li>Windows<span>first testers, December</span></li>
+						<li>Mac<span>next</span></li>
+						<li>Linux<span>next</span></li>
+					</ul></div>
+				<div><h3>Your own AI account</h3>
+					<p>You choose the AI and pay that company directly; Tugboat never charges for it. Claude today. ChatGPT and others are planned.</p></div>
+				<div><h3>Your accounts</h3>
+					<p>Gmail, WhatsApp and Signal today. More to come. Use it from your phone.</p></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="progress">
+		<div class="wrap two">
+			<div>
+				<p class="kicker">Progress</p>
+				<h2>Lately</h2>
+				<ul class="log">
+					<li><span class="when">Nov 17</span><span>When a website asks for a sign-in code, it pings your phone. You type the code, and it carries on.</span></li>
+					<li><span class="when">Nov 16</span><span>Safety test: three instructions hidden in test emails. It followed none.</span></li>
+					<li><span class="when">Nov 15</span><span>Every task shows the message it came from, and its next step as one button.</span></li>
+				</ul>
+				<p class="small">The code isn't public yet. It will be published on GitHub in the coming days.</p>
+			</div>
+			<div class="about" id="about">
+				<p class="kicker">About</p>
+				<h2>Independent and open source</h2>
+				<p>Tugboat isn't a cloud service. It's software you run yourself, and we use it every day on our own email
+					and messages. What we learn there is what we build next.</p>
+				<p>There's no Tugboat server, so your mail and messages never reach us. No ads, and your data is never sold
+					or shared. The only thing we keep is the email you leave here, to tell you when it's ready.</p>
+				<p><b style="color:var(--ink)">Why a tugboat?</b> A great ship can cross an ocean but can't dock itself. A small,
+					stubborn boat brings it alongside, and the captain gives the final order. Tugboat does that with your day.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="questions" class="alt">
+		<div class="wrap narrow">
+			<div class="sec-head">
+				<p class="kicker">Questions</p>
+				<h2>Good to know</h2>
+			</div>
+			<details><summary>What leaves my computer?</summary>
+				<p>Nothing of yours leaves your computer, except the text sent to your AI company for a job, and the words of a web search.</p></details>
+			<details><summary>Does it send email for me?</summary>
+				<p>It writes the reply. You read it and press Send. It never sends in your name or spends your money without your tap.</p></details>
+			<details><summary>Which AI does it use?</summary>
+				<p>Your own account with an AI company. Today that's Claude, by Anthropic. ChatGPT and others are planned. You pay the AI company directly; Tugboat itself is free.</p></details>
+			<details><summary>Does my computer have to stay on?</summary>
+				<p>Yes. Tugboat works while the computer is on and awake, so a desktop that stays on works best. A laptop that sleeps will pause it. That's why we're planning a small ready-made box.</p></details>
+			<details><summary>Mac or Linux?</summary>
+				<p>Windows comes first. The installer already runs on Mac and Linux in our tests; those follow after the first testers.</p></details>
+			<details><summary>Is the code public?</summary>
+				<p>Not yet. It will be published on GitHub in the coming days, free and open source.</p></details>
+			<details><summary>When can I try it?</summary>
+				<p>First testers start in early December, on Windows. Join the list and you'll get one email when it's ready.</p></details>
+		</div>
+	</section>
+
+	<section id="join" class="final">
+		<div class="wrap narrow">
+			<p class="kicker">Early access</p>
+			<h2>Be one of the first.</h2>
+			<p class="soft">One email when it's ready. Your address isn't shared or used for anything else.</p>
+			<form class="join" data-join>
+				<label class="sr" for="email-bottom">Your email</label>
+				<div class="row">
+					<input id="email-bottom" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+					<button class="btn" type="submit">Get early access</button>
+				</div>
+				<label class="q" for="slips">What slips through the cracks for you? <span class="soft">(optional)</span></label>
+				<textarea id="slips" name="slips" rows="2" placeholder="Replies I forget, bills, follow-ups..."></textarea>
+				<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+				<p class="done" role="status" hidden>You're on the list. Thank you!</p>
+			</form>
+		</div>
+	</section>
 </main>
+
+<footer>
+	<div class="wrap">
+		<div>
+			<a class="brand" href="#top"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
+			<p>The AI assistant that does the work. You press Send.</p>
+			<p style="margin-top:0.6rem">© 2026 Tugboat · an independent open-source project</p>
+		</div>
+		<div>
+			<h3>Follow</h3>
+			<ul>
+				<li><a href="https://www.youtube.com/@tugboatdotbot">YouTube</a></li>
+				<li><a href="https://www.instagram.com/tugboat.bot/">Instagram</a></li>
+				<li><a href="https://www.linkedin.com/company/tugboatdotbot">LinkedIn</a></li>
+				<li><a href="https://www.facebook.com/profile.php?id=61596394393035">Facebook</a></li>
+				<li><a href="https://bsky.app/profile/tugboat.bot">Bluesky</a></li>
+			</ul>
+		</div>
+		<div>
+			<h3>Tugboat</h3>
+			<ul>
+				<li><a href="#join">Early access</a></li>
+				<li><a href="privacy.html">Privacy</a></li>
+				<li><a href="mailto:hello@tugboat.bot">hello@tugboat.bot</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<script>
+// Sign-ups go to the Google Form "Tugboat sign-ups" in Otto's Google account, which fills the Sheet of the same name.
+// The browser can't read Google's answer (no-cors), so the thank-you shows once the send has gone out.
+const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf3JxR7iO508jhFGac97qVxDzu4M6jKduvyRZ_2dze88w8mRw/formResponse'
+document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit', async e => {
+	e.preventDefault()
+	if (f.website.value) return
+	const d = new FormData()
+	d.append('entry.1082021681', f.email.value.trim())
+	if (f.slips) d.append('entry.1092229435', f.slips.value.trim())
+	try { await fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: d }) } catch {}
+	f.querySelector('.row').hidden = true
+	f.querySelectorAll('label.q, textarea').forEach(x => x.hidden = true)
+	f.querySelector('.done').hidden = false
+}))
+
+// Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
+// Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
+// No cookies, no IP address, nothing personal. Skipped for automated browsers.
+;(() => {
+	if (navigator.webdriver) return
+	let visitor = ''
+	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
+	const q = new URLSearchParams(location.search)
+	let source = q.get('utm_source') || q.get('ref') || q.get('from') || ''
+	if (!source && document.referrer) { try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h !== location.hostname) source = h } catch {} }
+	const d = new FormData()
+	d.append('entry.1834262139', location.pathname || '/')
+	d.append('entry.1310039105', source || 'direct')
+	d.append('entry.1872699160', visitor || 'unknown')
+	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
+	try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+})()
+</script>
 </body>
 </html>
