@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tugboat.bot/sitemap.xml
+Sitemap: https://tugboat.bot/guide/sitemap-index.xml
