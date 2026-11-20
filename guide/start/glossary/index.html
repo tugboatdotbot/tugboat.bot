@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-sidebar class="astro-2a65yugk"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Glossary: the words of this field, and what each project means by them | Tugboat</title><link rel="canonical" href="https://tugboat.bot/guide/start/glossary/"/><link rel="sitemap" href="/guide/sitemap-index.xml"/><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;ef85ecb2f5f54a8eaa55469e5325b684&quot;}"></script><script>// Copied from tugboat.bot/index.html, Nov 19. The page path (/guide/...) tells guide visits apart.
+// Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
+// Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
+// No cookies, no IP address, nothing personal. Skipped for robots (see below).
+;(() => {
+	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
+	let visitor = ''
+	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
+	const q = new URLSearchParams(location.search)
+	let source = q.get('utm_source') || q.get('ref') || q.get('from') || ''
+	if (!source && document.referrer) { try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h !== location.hostname) source = h } catch {} }
+	const d = new FormData()
+	d.append('entry.1834262139', location.pathname || '/')
+	d.append('entry.1310039105', source || 'direct')
+	d.append('entry.1872699160', visitor || 'unknown')
+	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
+	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
+	// previewers load the page and run it, but never do these, so they are not counted.
+	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const send = () => {
+		events.forEach(e => removeEventListener(e, send, true))
+		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	}
+	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
+})()
+</script><link rel="shortcut icon" href="/guide/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.8"/><meta name="generator" content="Starlight v0.42.10"/><meta property="og:title" content="Glossary: the words of this field, and what each project means by them"/><meta property="og:type" content="article"/><meta property="og:url" content="https://tugboat.bot/guide/start/glossary/"/><meta property="og:locale" content="en"/><meta property="og:description" content="The standard terms for the parts of an AI agent system, in plain words, with the different names OpenClaw, Hermes Agent, Paperclip, NanoClaw and Claude Code give them."/><meta property="og:site_name" content="Tugboat"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="The standard terms for the parts of an AI agent system, in plain words, with the different names OpenClaw, Hermes Agent, Paperclip, NanoClaw and Claude Code give them."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/guide/_astro/print.C9eyqPGL.css" media="print"><link rel="stylesheet" href="/guide/_astro/common.DS8t2AxF.css"><style>@layer starlight.components{svg:where(.astro-t4didigu){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/guide/_astro/page.cNngjUgL.js"></script></head><body class="astro-2a65yugk"><a class="sl-skip-link astro-ew7cd5wj" href="#_top">Skip to content</a><div class="page sl-flex astro-iy5obmy3"><header class="header astro-iy5obmy3"><div class="header astro-ggayirod"><div class="title-wrapper sl-flex astro-ggayirod"><a href="/guide/" class="site-title sl-flex astro-u2a65u3i"><span class="astro-u2a65u3i" translate="no">Tugboat</span></a></div><div class="sl-flex print:hidden astro-ggayirod"></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-ggayirod"><div class="sl-flex social-icons astro-ggayirod"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-iy5obmy3" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-lqqwrmet"><svg aria-hidden="true" class="open-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-lqqwrmet">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-iy5obmy3"><div class="sidebar-content sl-flex astro-iy5obmy3"><sl-sidebar-state-persist data-hash="0gspgz0" class="astro-sdnwmmos"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ifldan4l"><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Start here</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/" class="astro-ifldan4l"><span class="astro-ifldan4l">Home</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/what-an-ai-employee-is/" class="astro-ifldan4l"><span class="astro-ifldan4l">What an AI employee is</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/a-day-with-it/" class="astro-ifldan4l"><span class="astro-ifldan4l">A day with it</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/glossary/" aria-current="page" class="astro-ifldan4l"><span class="astro-ifldan4l">Glossary</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">How it works</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/how-it-works/overview/" class="astro-ifldan4l"><span class="astro-ifldan4l">The whole picture</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The rules</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/rules/what-anthropic-and-openai-allow/" class="astro-ifldan4l"><span class="astro-ifldan4l">What Anthropic and OpenAI allow</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The landscape</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/landscape/feature-matrix/" class="astro-ifldan4l"><span class="astro-ifldan4l">Feature matrix</span></a></li><li class="astro-ifldan4l"><a href="/guide/landscape/alternatives-compared/" class="astro-ifldan4l"><span class="astro-ifldan4l">The alternatives compared</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">For a team</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/team/virtual-employee/" class="astro-ifldan4l"><span class="astro-ifldan4l">A virtual employee</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Tugboat</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/kit/where-it-stands/" class="astro-ifldan4l"><span class="astro-ifldan4l">Where it stands</span></a></li><li class="astro-ifldan4l"><a href="/guide/kit/how-it-differs/" class="astro-ifldan4l"><span class="astro-ifldan4l">How it differs</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">About</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/about/" class="astro-ifldan4l"><span class="astro-ifldan4l">About this site</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-l5vay6rm"><div class="social-icons astro-l5vay6rm"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-iy5obmy3"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-ovphhokr"><div class="main-pane astro-ovphhokr"><main data-pagefind-body class="astro-2a65yugk" lang="en" dir="ltr"><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><h1 id="_top" class="astro-3uuk6cbd">Glossary: the words of this field, and what each project means by them</h1></div></div><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><div class="sl-markdown-content"><p class="meta">For: everyone. Last checked: November 10, 2026.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-short-version">The short version</h2><a class="sl-anchor-link" href="#the-short-version"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The short version”</span></a></div>
+<ul>
+<li><strong>The field has settled words for most parts.</strong> An AI worker is an <em>agent</em>. The program that runs a model in a loop with tools is a <em>harness</em>. A connection to a chat app is a <em>channel</em>. A reusable package of instructions is a <em>skill</em>.</li>
+<li><strong>The projects do not all use them the same way.</strong> OpenClaw says “channel” where Hermes Agent says “platform”. “Heartbeat” means four different things in four projects.</li>
+<li><strong>Some things have no settled word yet.</strong> The always-on program in the middle is a “gateway” in two projects, a “server” in a third and a “host” in a fourth.</li>
+<li><strong>This site uses the standard word and defines it on first use.</strong> Where we use a word of our own, we say so. There are two: <em>follow-through</em> and <em>virtual employee</em>.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-standard-words">The standard words</h2><a class="sl-anchor-link" href="#the-standard-words"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The standard words”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+<th>You will also see</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agent</strong></td>
+<td>One AI worker: a model that plans its own steps and uses tools in a loop to get a job done</td>
+<td>assistant; “AI employee” in small-business marketing</td>
+</tr>
+<tr>
+<td><strong>Subagent</strong></td>
+<td>A second agent that an agent starts for one piece of work. It works in its own context and returns a summary</td>
+<td>sub-agent, worker</td>
+</tr>
+<tr>
+<td><strong>Multi-agent system</strong></td>
+<td>Several agents working together. In plain speech, a team of agents</td>
+<td>agent team; “crew” in the CrewAI framework; “company” in Paperclip</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>The AI model itself, such as Claude or GPT</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td><strong>Model provider</strong></td>
+<td>The company or service that runs the model for you</td>
+<td>provider</td>
+</tr>
+<tr>
+<td><strong>Harness</strong></td>
+<td>The program that runs a model in a loop with tools: it supplies file access, commands, permissions and memory. Claude Code and Codex are harnesses. Anthropic’s glossary puts it this way: Claude Code is the harness, and Claude is the model inside it</td>
+<td>agent harness, agent runtime, coding agent</td>
+</tr>
+<tr>
+<td><strong>Agent loop</strong></td>
+<td>The cycle inside a harness: gather context, take an action, check the result, repeat</td>
+<td>agentic loop</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>In self-hosted assistants: the always-on program that holds the chat connections, the sessions and the scheduler. It has no AI in it; it passes work to the agents</td>
+<td>server, host, control plane, daemon</td>
+</tr>
+<tr>
+<td><strong>Channel</strong></td>
+<td>A connection between an agent and a place people talk to it: Telegram, Slack, Microsoft Teams, a web page</td>
+<td>platform, chat connector; “surface” for any place an agent appears</td>
+</tr>
+<tr>
+<td><strong>Session</strong></td>
+<td>One conversation and its state. The stored text is the transcript, or session history</td>
+<td>thread, conversation</td>
+</tr>
+<tr>
+<td><strong>Context window</strong></td>
+<td>What the model can see at one moment. When it fills, the harness summarises older parts; that is <em>compaction</em></td>
+<td>context</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>What an agent keeps between sessions, usually notes it writes for itself in files</td>
+<td>long-term memory</td>
+</tr>
+<tr>
+<td><strong>Instructions</strong></td>
+<td>The files that tell an agent its role and rules, such as <code dir="auto">AGENTS.md</code> or <code dir="auto">CLAUDE.md</code>. The model receives them as its system prompt</td>
+<td>system prompt; <em>persona</em> for the character part</td>
+</tr>
+<tr>
+<td><strong>Skill</strong></td>
+<td>A reusable package of instructions an agent loads when it needs it: a folder with a <code dir="auto">SKILL.md</code> file. An open format that most projects now share</td>
+<td>Agent Skill</td>
+</tr>
+<tr>
+<td><strong>Tool</strong></td>
+<td>One action an agent can take: read a file, run a command, send a message</td>
+<td>action, function</td>
+</tr>
+<tr>
+<td><strong>MCP server</strong></td>
+<td>A small program that gives an agent a set of tools over the Model Context Protocol, an open standard for connecting agents to services</td>
+<td>connector, for a ready-made one</td>
+</tr>
+<tr>
+<td><strong>Plugin</strong></td>
+<td>Add-on code for the system itself, as opposed to a tool for the agent</td>
+<td>extension</td>
+</tr>
+<tr>
+<td><strong>Scheduled task</strong></td>
+<td>Work that starts at set times. The part that starts it is the scheduler</td>
+<td>cron job, automation, routine</td>
+</tr>
+<tr>
+<td><strong>Heartbeat</strong></td>
+<td>In the OpenClaw family: a regular “is there anything to do?” check. See “Words that trap” below</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>An event that starts work: a new message, a webhook, a file change</td>
+<td>hook, wakeup</td>
+</tr>
+<tr>
+<td><strong>Task</strong></td>
+<td>A piece of work. One execution of it is a <em>run</em>. One exchange in a conversation is a <em>turn</em></td>
+<td>issue, job, card</td>
+</tr>
+<tr>
+<td><strong>Approval</strong></td>
+<td>A person saying yes before an agent acts. The general idea is <em>human-in-the-loop</em></td>
+<td>confirmation, permission prompt</td>
+</tr>
+<tr>
+<td><strong>Permissions</strong></td>
+<td>Which tools an agent may use, and with what arguments</td>
+<td>tool policy, rules</td>
+</tr>
+<tr>
+<td><strong>Sandbox</strong></td>
+<td>A technical wall around where an agent’s commands run: a container, a virtual machine, or operating-system isolation</td>
+<td>container, environment</td>
+</tr>
+<tr>
+<td><strong>Allowlist</strong></td>
+<td>The list of people or things that are let through. Everyone else is refused</td>
+<td>pairing, for adding a person to it</td>
+</tr>
+<tr>
+<td><strong>Prompt injection</strong></td>
+<td>Hidden instructions in something an agent reads, such as an email or a web page, written to make it misbehave</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Subscription</strong> and <strong>API key</strong></td>
+<td>The two ways the AI is paid for: a monthly plan you sign in to, or a password-like code billed by the amount used</td>
+<td>plan; usage-based, pay-as-you-go</td>
+</tr>
+<tr>
+<td><strong>Workspace</strong></td>
+<td>The folder an agent works in</td>
+<td>working directory</td>
+</tr>
+<tr>
+<td><strong>Follow-through</strong></td>
+<td>Our own word. Every open task has one owner and a date, and the agent keeps asking until it is closed. The field has no noun for this; the nearest descriptions are “task tracking with follow-ups” and “human-in-the-loop”</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-each-project-calls-each-part">What each project calls each part</h2><a class="sl-anchor-link" href="#what-each-project-calls-each-part"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What each project calls each part”</span></a></div>
+<p>Taken from each project’s own documentation and code on the date above. “(no word)” means the project has the part and no fixed name for it.</p>
+<!-- gen:terms -->
+<table>
+<thead>
+<tr>
+<th>The part</th>
+<th>OpenClaw</th>
+<th>Hermes Agent</th>
+<th>Paperclip</th>
+<th>NanoClaw</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The long-running process everything connects to</td>
+<td>Gateway, daemon <span class="note">One always-on process; default port 18789.</span></td>
+<td>gateway, messaging gateway, backend <span class="note">“Backend” is what <code dir="auto">hermes serve</code> runs for the desktop app.</span></td>
+<td>server, control plane, instance <span class="note">“One Paperclip instance can run multiple companies.” Also “service” when installed.</span></td>
+<td>host, host process <span class="note">One Node.js process routing messages to per-session Docker containers.</span></td>
+<td>(no word) <span class="note">Nearest: “supervisor” (CLI <code dir="auto">daemon</code>) for background sessions; “server mode” for Remote Control.</span></td>
+</tr>
+<tr>
+<td>One AI worker</td>
+<td>agent, claw <span class="note">“claw” is informal: one person’s instance.</span></td>
+<td>agent, profile, Bot, subagent, worker <span class="note">A configured agent is a profile; Desktop says Bot; Kanban says worker.</span></td>
+<td>agent, employee <span class="note">“Every employee is an AI agent.” Creating one is “hiring”.</span></td>
+<td>agent, agent group <span class="note">Stored as an “agent group”, which means one agent.</span></td>
+<td>agent, subagent, teammate <span class="note">“subagent” inside a session; “teammate” in an agent team.</span></td>
+</tr>
+<tr>
+<td>A group of AI workers</td>
+<td>(no word) <span class="note">No single noun. Related: multi-agent, sub-agents, Swarm, coordinator and specialists.</span></td>
+<td>roster, Group Chats, rooms, board <span class="note">No single word. A release headline once used “society”.</span></td>
+<td>company, organization, team, org chart <span class="note">Company in code and older docs; organization in newer docs; team is a sub-group (<code dir="auto">TEAM.md</code>).</span></td>
+<td>multi-agent team <span class="note">“There is no swarm engine.” Agents are joined by permission edges (“destinations”).</span></td>
+<td>agent team <span class="note">Led by a “team lead”; experimental, off by default.</span></td>
+</tr>
+<tr>
+<td>What does the thinking (every layer the project names)</td>
+<td>provider, model, agent runtime, harness, CLI backend, ACP <span class="note">Four named layers; “harness” is the code term for what provides a runtime.</span></td>
+<td>model, provider, API mode, runtime, auxiliary model, credential pool, agent loop <span class="note">Loop is class <code dir="auto">AIAgent</code>. “Harness” not used; “adapter” means a chat connection.</span></td>
+<td>adapter, Runner, engine, driver, harness, runtime, provider, model, AI connection <span class="note">Outside in: adapter or Runner (bridge), engine/driver inside, harness (outside program), AI connection (account).</span></td>
+<td>provider, harness, model, agent-runner, container <span class="note">Provider is the agent CLI, such as Claude Code; agent-runner is the in-container loop.</span></td>
+<td>model, agentic harness, agentic loop, provider, gateway, surface <span class="note">“Claude Code is the harness; Claude is the model inside it.”</span></td>
+</tr>
+<tr>
+<td>A connection to a chat app</td>
+<td>channel, channel account <span class="note">One login is a channel account (<code dir="auto">accountId</code>).</span></td>
+<td>platform, messaging platform, platform adapter <span class="note">“Channel” only in “home channel”, the default delivery chat.</span></td>
+<td>chat connector, chat channel, channel, chat endpoint <span class="note">Chat endpoint in code. “One connection serves one bot and one agent.”</span></td>
+<td>channel, adapter, messaging group, wiring <span class="note">A messaging group is one chat; a wiring links it to an agent group.</span></td>
+<td>channel, chat bridge <span class="note">A channel is an MCP server pushing events into one session.</span></td>
+</tr>
+<tr>
+<td>A timed or periodic wake-up</td>
+<td>Automations, automation job, cron, heartbeat <span class="note"><code dir="auto">cron</code> is an alias; “heartbeat” retired as a separate mechanism in v2026.8.1.</span></td>
+<td>cron job, heartbeat, loop, tick, wakeup <span class="note">Cron ticks every 60 s; heartbeat and <code dir="auto">/loop</code> live inside one session.</span></td>
+<td>heartbeat, timer heartbeat, routine, wakeup <span class="note">Heartbeat is any run window; timer heartbeat (per agent) and routine (cron) are timed.</span></td>
+<td>scheduled task, host sweep <span class="note">“Heartbeat” means a liveness file, not a wake-up.</span></td>
+<td>scheduled task, routine, wakeup <span class="note">Three kinds: session-scoped, Desktop, cloud. “Routine” is the cloud kind’s former name.</span></td>
+</tr>
+<tr>
+<td>A unit of work</td>
+<td>run, turn, job, goal, card <span class="note">A goal is one per session; a card is a Workboard item.</span></td>
+<td>turn, session, job, task, run, goal <span class="note">Job is cron; task is a Kanban card or delegated task.</span></td>
+<td>issue, task, run, heartbeat run <span class="note">Issue in API and database, task in the app; one execution is a run.</span></td>
+<td>task, message <span class="note">“Task” is scheduled only; other work arrives as a message.</span></td>
+<td>task, turn, session <span class="note">“task” in task lists and scheduled tasks; a “turn” is one response.</span></td>
+</tr>
+<tr>
+<td>Files holding an agent’s instructions or persona</td>
+<td>workspace files, bootstrap files <span class="note"><code dir="auto">AGENTS.md</code>, <code dir="auto">SOUL.md</code>, <code dir="auto">USER.md</code>, <code dir="auto">IDENTITY.md</code>, <code dir="auto">BOOT.md</code>, <code dir="auto">BOOTSTRAP.md</code>.</span></td>
+<td>SOUL.md, context files, personality <span class="note"><code dir="auto">SOUL.md</code> is identity; <code dir="auto">AGENTS.md</code> and similar hold project instructions.</span></td>
+<td>instructions bundle, AGENTS.md, prompt template <span class="note">Bundle is managed or external; entry file <code dir="auto">AGENTS.md</code>; prompt template is the older term.</span></td>
+<td>instructions.prepend.md, CLAUDE.md <span class="note">CLAUDE.md is generated at each start; container/CLAUDE.md is the shared base.</span></td>
+<td>CLAUDE.md, rules, output style, system prompt <span class="note">Also reads AGENTS.md; rules live in <code dir="auto">.claude/rules/</code>; subagent Markdown files too.</span></td>
+</tr>
+<tr>
+<td>Long-term memory</td>
+<td>memory, dreaming, memory flush <span class="note"><code dir="auto">MEMORY.md</code> plus daily notes; dreaming promotes items.</span></td>
+<td>memory, persistent memory, memory provider, session search <span class="note"><code dir="auto">MEMORY.md</code> and <code dir="auto">USER.md</code>; providers are external plugins.</span></td>
+<td>memory connectors, Memory / Knowledge <span class="note">No core term: memory connectors are experimental; Memory / Knowledge is a roadmap item.</span></td>
+<td>agent memory, memory/ tree, Core Memory <span class="note">Plain Markdown files; “no memory database or embedding store”.</span></td>
+<td>auto memory <span class="note">The Claude-written counterpart to CLAUDE.md. The Claude apps say “memory”.</span></td>
+</tr>
+<tr>
+<td>A reusable package of instructions</td>
+<td>skill <span class="note">“A <code dir="auto">SKILL.md</code> instruction pack loaded into the agent prompt.”</span></td>
+<td>skill, Skills Hub, skill bundle, optional skills <span class="note">A <code dir="auto">SKILL.md</code> folder.</span></td>
+<td>skill, Skill Studio, skill source <span class="note">A <code dir="auto">SKILL.md</code> folder: “May use connections; must not own tokens.”</span></td>
+<td>skill, container skill <span class="note">Host skills are run by a coding agent; container skills by the agent.</span></td>
+<td>skill <span class="note">“Bundled skills” ship with the product; follows the Agent Skills open standard.</span></td>
+</tr>
+<tr>
+<td>Add-on code</td>
+<td>plugin, tool, hook, bundle plugin <span class="note">“Native OpenClaw plugins run in-process with the Gateway.”</span></td>
+<td>plugin, tool, toolset, MCP server, hook, Connectors <span class="note">“Connectors” is the Desktop word.</span></td>
+<td>plugin, external adapter, app, connection, action, tool <span class="note">Plugin is code packaging; external adapter adds a harness; app/connection is an outside service.</span></td>
+<td>skill, template, MCP tools <span class="note">Skills copy code in; templates are Agent Plugins 1.0.0 directories.</span></td>
+<td>plugin, MCP server, connector, hook, mod, tool <span class="note">Plugins come from a “marketplace”.</span></td>
+</tr>
+<tr>
+<td>Asking a human before acting</td>
+<td>exec approvals, approval, ask_user, pairing <span class="note">Permission mode “Ask me” (<code dir="auto">guarded</code>); pairing approves access.</span></td>
+<td>approval, clarify, write approval <span class="note">“Pairing” is for access, not actions.</span></td>
+<td>approval, board approval, Ask first, review, interaction, decision <span class="note">Ask-first lands in the Review queue; interaction is the card shown to a human.</span></td>
+<td>approval, approval card, policy <span class="note">A policy sits on an agent-to-agent edge; “no reachable approver means auto-deny.”</span></td>
+<td>permission prompt, permission mode, permission rule, permission relay <span class="note">“Permission relay” is the remote form; “Needs input” in agent view.</span></td>
+</tr>
+<tr>
+<td>The human in charge</td>
+<td>operator, owner <span class="note">Operator: control-plane role. Owner: chat side, via <code dir="auto">commands.ownerAllowFrom</code>.</span></td>
+<td>user, bot owner, approvers, administrator <span class="note">No fixed word.</span></td>
+<td>the board, board operator, operator, responsible user, owner, instance admin <span class="note">Responsible user is per task; owner and instance admin are roles.</span></td>
+<td>owner, admin, operator <span class="note">Owner is “always global.”</span></td>
+<td>you, the user, Owner, admin <span class="note">No special word; “Owner” and “admin” only in organisations.</span></td>
+</tr>
+<tr>
+<td>The state of one conversation</td>
+<td>session, session key, main session <span class="note">DMs go to the main session by default.</span></td>
+<td>session, session key, session id, transcript <span class="note">Session ids look like <code dir="auto">YYYYMMDD_HHMMSS_&lt;hex&gt;</code>.</span></td>
+<td>session, conversation <span class="note">Session is the harness’s saved conversation, per agent and task; conversation is for Agent Chat.</span></td>
+<td>session, continuation <span class="note">Session is a folder with inbound.db and outbound.db; continuation is the resume token.</span></td>
+<td>session, transcript, context window <span class="note">A session is tied to a working directory.</span></td>
+</tr>
+<tr>
+<td>The agent’s working folder</td>
+<td>workspace <span class="note">“The workspace is the default cwd, not a hard sandbox.”</span></td>
+<td>Hermes home, working directory, worktree <span class="note">No agent workspace concept; “workspace” only for Desktop UI and browser scratch folder.</span></td>
+<td>workspace, project workspace, execution workspace, cwd, AGENT_HOME <span class="note">Execution workspaces can be isolated git worktrees; <code dir="auto">AGENT_HOME</code> holds the agent’s own files.</span></td>
+<td>workspace, group folder <span class="note">groups/<folder>/, seen inside the container as /workspace/agent.</span></td>
+<td>working directory, workspace, worktree <span class="note">“Workspace trust” for a trusted folder; a worktree is an isolated copy.</span></td>
+</tr>
+<tr>
+<td>The kind of product it calls itself</td>
+<td>open-source AI assistant, AI agent, personal assistant, local-first control plane, self-hosted gateway <span class="note">Why-OpenClaw page: “extensible, proactive, open-source AI agent”.</span></td>
+<td>self-improving AI agent <span class="note">Also “The agent that grows with you”.</span></td>
+<td>control plane, orchestration, Agentic OS <span class="note">“Not an agent framework.” “Agentic OS” names one pillar.</span></td>
+<td>AI assistant, personal AI agent <span class="note">Site: “Your personal AI agent. Secure. Lightweight. Yours.”</span></td>
+<td>agentic coding tool, AI-powered coding assistant <span class="note">“AI employee” and “digital employee” not found.</span></td>
+</tr>
+</tbody>
+</table>
+<!-- /gen:terms -->
+<div class="sl-heading-wrapper level-h2"><h2 id="words-that-trap">Words that trap</h2><a class="sl-anchor-link" href="#words-that-trap"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Words that trap”</span></a></div>
+<p>These words are standard, and still mean different things in different places.</p>
+<ul>
+<li><strong>Heartbeat.</strong> In OpenClaw it was a periodic check driven by a <code dir="auto">HEARTBEAT.md</code> file; since August 2026 it is an ordinary scheduled job there. In Hermes Agent it is one recurring prompt inside a single session. In Paperclip it is any short run of an agent, timed or not. In NanoClaw it is a file that shows an agent is alive.</li>
+<li><strong>Gateway.</strong> In OpenClaw and Hermes Agent it is the always-on program described above. Elsewhere it can mean a proxy that sits in front of model providers, or a proxy that sits in front of tools. Paperclip has a “tool gateway” of that second kind.</li>
+<li><strong>Adapter.</strong> In Paperclip, the bridge between its server and one harness. In Hermes Agent, the code for one chat app.</li>
+<li><strong>Provider.</strong> Almost everywhere, whoever serves the model. In NanoClaw, the agent program that runs inside the container.</li>
+<li><strong>Connector.</strong> At Anthropic, an MCP server added to your claude.ai account. In Paperclip, a chat connection.</li>
+<li><strong>Runtime and harness.</strong> Often used for the same thing. LangChain’s split is the tidiest: a <em>framework</em> is a library you build with, a <em>runtime</em> keeps long work running and resumable, a <em>harness</em> is the ready-made program with tools included.</li>
+<li><strong>Routine.</strong> Anthropic’s former name for a cloud scheduled task. Paperclip’s current name for a scheduled job.</li>
+<li><strong>Hub.</strong> A registry or marketplace, such as ClawHub for OpenClaw skills. Not the always-on program.</li>
+<li><strong>Crew.</strong> A specific object in the CrewAI framework. Used as a common noun, it makes developers think of CrewAI.</li>
+<li><strong>Agent group.</strong> In NanoClaw, one agent. Not a group of agents.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-the-two-kinds-of-product-are-called">What the two kinds of product are called</h2><a class="sl-anchor-link" href="#what-the-two-kinds-of-product-are-called"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What the two kinds of product are called”</span></a></div>
+<p><strong>One person’s always-on assistant.</strong> The products call themselves a “personal AI assistant” or “personal AI agent”. Since February 2026 developers also say “claw”, after OpenClaw: Andrej Karpathy wrote that “Claws are now a new layer on top of LLM agents”, and Simon Willison called it a term of art for OpenClaw-like systems that run on personal hardware and talk over messaging apps (<a href="https://simonwillison.net/2026/Feb/21/claws/">Willison, February 21, 2026</a>). The word is real and current. It is also less than a year old.</p>
+<p><strong>An AI worker inside a company.</strong> Small-business products such as Lindy and Sintra say “AI employee”. In 2026 the large vendors chose “AI coworker”: OpenAI for Frontier, Microsoft for Copilot Cowork, Salesforce for Agentforce Coworker. This site says “AI employee” for the general idea. “Virtual employee” is our own phrase for one that joins a team under its own name; we found no other project using it.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="sources-and-dates">Sources and dates</h2><a class="sl-anchor-link" href="#sources-and-dates"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Sources and dates”</span></a></div>
+<ul>
+<li>Each project’s words were read from its own documentation and, for Paperclip, its source code, on November 10, 2026. The pages are listed at the end of <a href="/guide/landscape/feature-matrix/">the feature matrix</a>.</li>
+<li>The standard words were checked against the documentation of Anthropic, OpenAI, Google, Microsoft, LangChain, CrewAI and the Model Context Protocol on the same date.</li>
+<li>Most pages were read through a tool that summarises. Quotes are as it returned them. Check the page before relying on exact wording.</li>
+<li>Vocabulary in this field moves quickly. “Harness” settled only during 2026.</li>
+</ul>
+</div><footer class="sl-flex astro-u6rkd2lx"><div class="meta sl-flex astro-u6rkd2lx"></div><div class="pagination-links print:hidden astro-q2h5ybd7" dir="ltr"><a href="/guide/start/a-day-with-it/" rel="prev" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-q2h5ybd7">Previous<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">A day with it</span></span></a><a href="/guide/how-it-works/overview/" rel="next" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-q2h5ybd7">Next<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">The whole picture</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

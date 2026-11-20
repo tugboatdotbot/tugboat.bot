@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-2a65yugk"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>The alternatives compared | Tugboat</title><link rel="canonical" href="https://tugboat.bot/guide/landscape/alternatives-compared/"/><link rel="sitemap" href="/guide/sitemap-index.xml"/><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;ef85ecb2f5f54a8eaa55469e5325b684&quot;}"></script><script>// Copied from tugboat.bot/index.html, Nov 19. The page path (/guide/...) tells guide visits apart.
+// Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
+// Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
+// No cookies, no IP address, nothing personal. Skipped for robots (see below).
+;(() => {
+	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
+	let visitor = ''
+	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
+	const q = new URLSearchParams(location.search)
+	let source = q.get('utm_source') || q.get('ref') || q.get('from') || ''
+	if (!source && document.referrer) { try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h !== location.hostname) source = h } catch {} }
+	const d = new FormData()
+	d.append('entry.1834262139', location.pathname || '/')
+	d.append('entry.1310039105', source || 'direct')
+	d.append('entry.1872699160', visitor || 'unknown')
+	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
+	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
+	// previewers load the page and run it, but never do these, so they are not counted.
+	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const send = () => {
+		events.forEach(e => removeEventListener(e, send, true))
+		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	}
+	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
+})()
+</script><link rel="shortcut icon" href="/guide/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.8"/><meta name="generator" content="Starlight v0.42.10"/><meta property="og:title" content="The alternatives compared"/><meta property="og:type" content="article"/><meta property="og:url" content="https://tugboat.bot/guide/landscape/alternatives-compared/"/><meta property="og:locale" content="en"/><meta property="og:description" content="The four kinds of AI assistant and AI employee product, how each kind works underneath, and which to choose for which reason. Last checked November 10, 2026."/><meta property="og:site_name" content="Tugboat"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="The four kinds of AI assistant and AI employee product, how each kind works underneath, and which to choose for which reason. Last checked November 10, 2026."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/guide/_astro/print.C9eyqPGL.css" media="print"><link rel="stylesheet" href="/guide/_astro/common.DS8t2AxF.css"><style>@layer starlight.components{svg:where(.astro-t4didigu){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/guide/_astro/page.cNngjUgL.js"></script></head><body class="astro-2a65yugk"><a class="sl-skip-link astro-ew7cd5wj" href="#_top">Skip to content</a><div class="page sl-flex astro-iy5obmy3"><header class="header astro-iy5obmy3"><div class="header astro-ggayirod"><div class="title-wrapper sl-flex astro-ggayirod"><a href="/guide/" class="site-title sl-flex astro-u2a65u3i"><span class="astro-u2a65u3i" translate="no">Tugboat</span></a></div><div class="sl-flex print:hidden astro-ggayirod"></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-ggayirod"><div class="sl-flex social-icons astro-ggayirod"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-iy5obmy3" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-lqqwrmet"><svg aria-hidden="true" class="open-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-lqqwrmet">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-iy5obmy3"><div class="sidebar-content sl-flex astro-iy5obmy3"><sl-sidebar-state-persist data-hash="0gspgz0" class="astro-sdnwmmos"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ifldan4l"><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Start here</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/" class="astro-ifldan4l"><span class="astro-ifldan4l">Home</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/what-an-ai-employee-is/" class="astro-ifldan4l"><span class="astro-ifldan4l">What an AI employee is</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/a-day-with-it/" class="astro-ifldan4l"><span class="astro-ifldan4l">A day with it</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/glossary/" class="astro-ifldan4l"><span class="astro-ifldan4l">Glossary</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">How it works</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/how-it-works/overview/" class="astro-ifldan4l"><span class="astro-ifldan4l">The whole picture</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The rules</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/rules/what-anthropic-and-openai-allow/" class="astro-ifldan4l"><span class="astro-ifldan4l">What Anthropic and OpenAI allow</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The landscape</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/landscape/feature-matrix/" class="astro-ifldan4l"><span class="astro-ifldan4l">Feature matrix</span></a></li><li class="astro-ifldan4l"><a href="/guide/landscape/alternatives-compared/" aria-current="page" class="astro-ifldan4l"><span class="astro-ifldan4l">The alternatives compared</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">For a team</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/team/virtual-employee/" class="astro-ifldan4l"><span class="astro-ifldan4l">A virtual employee</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Tugboat</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/kit/where-it-stands/" class="astro-ifldan4l"><span class="astro-ifldan4l">Where it stands</span></a></li><li class="astro-ifldan4l"><a href="/guide/kit/how-it-differs/" class="astro-ifldan4l"><span class="astro-ifldan4l">How it differs</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">About</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/about/" class="astro-ifldan4l"><span class="astro-ifldan4l">About this site</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-l5vay6rm"><div class="social-icons astro-l5vay6rm"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-iy5obmy3"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-ovphhokr"><aside class="right-sidebar-container print:hidden astro-ovphhokr"><div class="right-sidebar astro-ovphhokr"><div class="lg:sl-hidden astro-n2yfzt34"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-5zwpgsuu"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-5zwpgsuu"><details id="starlight__mobile-toc" class="astro-5zwpgsuu"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-5zwpgsuu"><span class="toggle sl-flex astro-5zwpgsuu">On this page<svg aria-hidden="true" class="caret astro-5zwpgsuu astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-5zwpgsuu"></span></summary><div class="dropdown astro-5zwpgsuu"><ul class="isMobile astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-four-kinds" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The four kinds</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-systems-you-run-yourself-in-one-paragraph-each" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The systems you run yourself, in one paragraph each</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-hosted-and-built-in-products" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The hosted and built-in products</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#which-to-choose-and-the-mechanism-behind-each-choice" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Which to choose, and the mechanism behind each choice</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-people-complain-about" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What people complain about</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/guide/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-n2yfzt34"><div class="sl-container astro-n2yfzt34"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-four-kinds" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The four kinds</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-systems-you-run-yourself-in-one-paragraph-each" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The systems you run yourself, in one paragraph each</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-hosted-and-built-in-products" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The hosted and built-in products</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#which-to-choose-and-the-mechanism-behind-each-choice" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Which to choose, and the mechanism behind each choice</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-people-complain-about" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What people complain about</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></nav></starlight-toc><script type="module" src="/guide/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-ovphhokr"><main data-pagefind-body class="astro-2a65yugk" lang="en" dir="ltr"><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><h1 id="_top" class="astro-3uuk6cbd">The alternatives compared</h1></div></div><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><div class="sl-markdown-content"><p class="meta">For: the owner choosing a product, and the builder choosing what to build on. Last checked: November 10, 2026.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-short-version">The short version</h2><a class="sl-anchor-link" href="#the-short-version"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The short version”</span></a></div>
+<ul>
+<li><strong>There are four kinds of product,</strong> plus Tugboat, the one we are building: open-source systems you run yourself, hosted personal assistants, hosted “AI employee” platforms, and features built into the AI apps.</li>
+<li><strong>What separates them is mechanism, not features.</strong> Where does the agent run, and where do your mail and messages live? What stays running when you are not there? Who is paid for the AI, and how? What stops the agent from acting without you?</li>
+<li><strong>For the systems you run yourself, we can answer those questions in detail,</strong> because their code and documentation are public. That comparison is <a href="/guide/landscape/feature-matrix/">the feature matrix</a>. This page is the map around it.</li>
+<li><strong>For hosted products we mostly cannot.</strong> Their inner workings are not published. That is itself a fact to weigh.</li>
+<li><strong>Tugboat is not the right choice for most people today.</strong> A stranger cannot install it yet.</li>
+</ul>
+<p>We make one of the things compared here. We ran none of the others. An <em>agent</em> on this page is one AI worker: a model that uses tools in a loop to get a job done. Other terms are in the <a href="/guide/start/glossary/">glossary</a>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-four-kinds">The four kinds</h2><a class="sl-anchor-link" href="#the-four-kinds"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The four kinds”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Examples</th>
+<th>Where the agent runs, and where your data lives</th>
+<th>Who is paid for the AI</th>
+<th>What you set up</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Open source, self-hosted</strong></td>
+<td>OpenClaw, Hermes Agent, NanoClaw, Paperclip</td>
+<td>Your own computer or server. Your mail and messages stay there, apart from what the agent sends to the model to be read</td>
+<td>You pay a model provider by use with an API key, or sign in with a subscription where the system and the vendor’s rules allow it</td>
+<td>Everything: install, connect each chat app and account, keep it running, keep it updated</td>
+</tr>
+<tr>
+<td><strong>Hosted personal assistant</strong></td>
+<td>Poke, Martin</td>
+<td>The maker’s cloud</td>
+<td>The maker, by monthly fee</td>
+<td>Almost nothing: you connect your accounts</td>
+</tr>
+<tr>
+<td><strong>Hosted “AI employee” platform</strong></td>
+<td>Lindy, Sintra, Marblism</td>
+<td>The maker’s cloud</td>
+<td>The maker, by monthly fee, often plus credits that vary with use</td>
+<td>Choosing roles and building workflows</td>
+</tr>
+<tr>
+<td><strong>Built into the AI apps</strong></td>
+<td>Claude (scheduled tasks, channels, connectors), ChatGPT (Pulse, agent mode), Grok Bot</td>
+<td>The AI company’s cloud, and for Claude also your desktop</td>
+<td>Included in a subscription you may already have</td>
+<td>Little: a schedule and a prompt</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-systems-you-run-yourself-in-one-paragraph-each">The systems you run yourself, in one paragraph each</h2><a class="sl-anchor-link" href="#the-systems-you-run-yourself-in-one-paragraph-each"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The systems you run yourself, in one paragraph each”</span></a></div>
+<p>Each of these has a full column in <a href="/guide/landscape/feature-matrix/">the feature matrix</a>. Facts are from each project’s documentation and code on November 10, 2026.</p>
+<p><strong>OpenClaw.</strong> One always-on program, the <em>gateway</em>, holds about 30 chat channels, every session and the scheduler. It has no AI in it; it passes work to agents. OpenClaw runs its own agent loop against dozens of model providers, or hands a turn to Claude Code or Codex. An agent is a folder of Markdown files plus a small database. By default the agent’s commands run on your machine with no sandbox and no approval step; both can be switched on, and an optional plugin can hold a send until you approve it. It is by far the most used, with about 394,000 GitHub stars, and has the largest security history.</p>
+<p><strong>Hermes Agent.</strong> Also a gateway with its own agent loop, written in Python by Nous Research. It runs natively on Windows. It keeps two deliberately small memory files and searches the full text of every past session. By default it writes and updates its own <em>skills</em>, which are reusable instruction files; that is what its makers mean by “self-improving”. Commands run on the host unless you choose a container. It supports more than 25 chat apps.</p>
+<p><strong>Paperclip.</strong> Not an assistant but a server for running a “company” of agents: an org chart, tasks with one assignee each, budgets, an audit log. It has no agent loop of its own. It starts other programs, such as Claude Code or Codex, for one short run at a time. Its server can hold an outgoing action until a person approves it. That is the most general gate of this kind we found, and it is off by default. Its chat connectors are experimental, and its Telegram and Slack connectors need a public web address.</p>
+<p><strong>NanoClaw.</strong> A small system built on Claude Code. Every conversation runs in its own container, a sealed box on your computer, and API keys are kept outside the box. You customise it by having Claude Code change NanoClaw’s own source code, so your installation becomes your own variant. On Windows it needs WSL2, a Linux layer inside Windows.</p>
+<p><strong>Claude Code on its own.</strong> Anthropic’s program, left running, with nothing third-party added. It has three official chat channels (Telegram, Discord, iMessage), all in research preview, and its own scheduled tasks. Nothing starts by itself when the computer does. Chat messages are delivered only while a session is open, and a timer set inside a session ends with it.</p>
+<p><strong>Tugboat.</strong> A gateway, with no AI in it, on one Windows PC. It starts Claude Code for one run per message, on the person’s own plan, with no window open. Since November 11 it runs one agent that reads mail, WhatsApp and Signal without changing anything, and puts a summary on a local web page. That agent has no tool that sends, reaches the internet or writes a file. Follow-through is being moved into the gateway; an older arrangement of several Telegram agents does it by instruction today. One user, no installer.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-hosted-and-built-in-products">The hosted and built-in products</h2><a class="sl-anchor-link" href="#the-hosted-and-built-in-products"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The hosted and built-in products”</span></a></div>
+<p>These publish little about how they work, so this table is thinner than the matrix. Facts are from vendor pages, news coverage and review sites, last checked November 9, 2026. “Unclear” means we could not confirm it.</p>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>What it is</th>
+<th>Your messages and mail live</th>
+<th>How you pay</th>
+<th>Acts on a schedule</th>
+<th>Follow-up on open items</th>
+<th>Approvals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Poke</strong></td>
+<td>A personal assistant you text (iMessage, SMS, Telegram)</td>
+<td>Their cloud. Used for training unless you choose “Maximum Privacy”</td>
+<td>Free tier; paid tiers negotiated or about $19 a month</td>
+<td>Yes</td>
+<td>Reminders</td>
+<td>Unclear</td>
+</tr>
+<tr>
+<td><strong>Martin</strong></td>
+<td>A voice-first personal assistant (text, calls, email, Slack)</td>
+<td>Their cloud</td>
+<td>About $21 to $35 a month</td>
+<td>Yes</td>
+<td>Reminders</td>
+<td>Unclear</td>
+</tr>
+<tr>
+<td><strong>Lindy</strong></td>
+<td>AI employees and a proactive assistant, with a workflow builder</td>
+<td>Their cloud</td>
+<td>About $30 to $50 a month per user, plus credits</td>
+<td>Yes</td>
+<td>Pings about conflicts, approvals and forgotten follow-ups</td>
+<td>Approval steps in workflows</td>
+</tr>
+<tr>
+<td><strong>Sintra</strong></td>
+<td>Twelve role assistants for small businesses, with shared memory</td>
+<td>Their cloud</td>
+<td>About $39 each or $97 for the bundle, as listed on review sites. Recent reviews report a move to metered pricing</td>
+<td>Partly</td>
+<td>Unclear</td>
+<td>Unclear</td>
+</tr>
+<tr>
+<td><strong>Marblism</strong></td>
+<td>Six role “AI employees” for small businesses</td>
+<td>Their cloud</td>
+<td>Flat monthly</td>
+<td>Partly</td>
+<td>Unclear</td>
+<td>Unclear</td>
+</tr>
+<tr>
+<td><strong>Claude apps</strong></td>
+<td>Scheduled tasks, phone-to-desktop control, connectors to mail and calendar</td>
+<td>Read through connectors; not copied to a local store</td>
+<td>Included in your plan</td>
+<td>Yes. Late runs were reported in September 2026</td>
+<td>None: a schedule plus a prompt</td>
+<td>Confirmations for risky actions</td>
+</tr>
+<tr>
+<td><strong>ChatGPT</strong></td>
+<td>A proactive daily brief (Pulse) and an agent mode</td>
+<td>Read through connectors</td>
+<td>Included in some plans</td>
+<td>Yes: a daily brief</td>
+<td>None</td>
+<td>Confirmations for risky actions</td>
+</tr>
+<tr>
+<td><strong>Grok Bot</strong></td>
+<td>Persistent agents in their own messenger, with a “chief of staff” agent over specialists</td>
+<td>The maker’s cloud</td>
+<td>Unclear. In beta since August 2026</td>
+<td>Yes</td>
+<td>The chief-of-staff agent oversees the specialists</td>
+<td>Unclear</td>
+</tr>
+</tbody>
+</table>
+<p>Google’s Gemini is left out. Its proactive help was reported in development in May 2026, and we could not confirm a launch.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="which-to-choose-and-the-mechanism-behind-each-choice">Which to choose, and the mechanism behind each choice</h2><a class="sl-anchor-link" href="#which-to-choose-and-the-mechanism-behind-each-choice"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Which to choose, and the mechanism behind each choice”</span></a></div>
+<p>Each line gives the reason in terms of how the system works, and what that same design costs you.</p>
+<p><strong>You want no installation, and your mail living in someone’s cloud is acceptable.</strong>
+Choose a hosted product: Poke or Martin for yourself; Lindy, Sintra or Marblism for a small business.
+<em>Why:</em> the agent, its schedule and its connections all run on the maker’s servers, so there is nothing to keep alive.
+<em>The cost:</em> your mail and messages are stored there, and you cannot inspect how approvals or limits are enforced.</p>
+<p><strong>A morning brief or a scheduled prompt is all you need.</strong>
+Use what is built into Claude or ChatGPT.
+<em>Why:</em> it is included in a subscription, and the AI company runs it.
+<em>The cost:</em> it is a schedule plus a prompt. Nothing owns an open item or comes back to it.</p>
+<p><strong>You want one assistant in many chat apps, on the model of your choice, and you will run and secure it yourself.</strong>
+Choose OpenClaw or Hermes Agent.
+<em>Why:</em> each is a gateway with its own agent loop, so it can hold dozens of chat channels and speak to dozens of model providers, including models on your own machine.
+<em>The cost:</em> by default the agent’s commands run on your computer with no sandbox, add-on skills are other people’s code, and both projects release weekly with breaking changes.
+<em>Between the two:</em> Hermes Agent treats Windows as a first-class system and keeps memory small and searchable. OpenClaw has the larger community and more channels, and the longer security history.</p>
+<p><strong>You want Claude as the agent, with the strongest wall around it.</strong>
+Choose NanoClaw.
+<em>Why:</em> it runs Claude Code inside a container per conversation and keeps the keys outside.
+<em>The cost:</em> it needs Docker, and on Windows WSL2. Customising it means changing its source code.</p>
+<p><strong>You run many agents on queues of work and need budgets, an audit trail and approvals.</strong>
+Choose Paperclip.
+<em>Why:</em> a server with a database keeps every task, every run and every cost, gives each task exactly one assignee, and can hold an action for a person’s yes.
+<em>The cost:</em> it brings no agent of its own, its chat connectors are experimental, and it does not install on Windows without WSL2.</p>
+<p><strong>Nothing may slip, nothing may go out without your yes, and you already pay for Claude.</strong>
+This is what Tugboat is for.
+<em>Why:</em> the agent that reads your messages has no tool that sends, reaches the internet or writes a file, and the gateway enforces that in code. The list of open items, each with a date, is kept by the gateway, and the gateway does the asking, so it does not depend on the AI.
+<em>The cost today:</em> a stranger cannot install it, it does not send by itself yet (you press Send in Gmail), it runs only on Windows, and nobody but its builder has used it.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-people-complain-about">What people complain about</h2><a class="sl-anchor-link" href="#what-people-complain-about"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What people complain about”</span></a></div>
+<p>These are anecdotes from review sites and forums, searched on November 10, 2026. Several sources are competitors of the product they review. Treat them as hints, not measurements.</p>
+<ul>
+<li><strong>Hosted “AI employee” platforms.</strong> Reviews say their output is generic unless it is heavily set up. Sintra has a recent cluster of one-star reviews about its move to metered pricing. Lindy scores 1.5 of 5 on Trustpilot across 37 reviews, mostly about credits and cancelling, against 4.9 of 5 on G2.</li>
+<li><strong>OpenClaw.</strong> Adoption is very large. There are also many accounts of people stopping in the first week: setup that costs more than it returns, memory that breaks without warning, instability.</li>
+<li><strong>Hermes Agent.</strong> Reviews mention high token use per turn, and a memory limit that is smaller than it sounds.</li>
+<li><strong>Paperclip.</strong> Reviews say you run the whole stack yourself and that cost is hard to forecast.</li>
+<li><strong>The AI apps’ own features.</strong> This is our reading, not a gathered complaint: they give a schedule plus a prompt, and nothing owns an item or chases it.</li>
+<li><strong>Tugboat.</strong> It works for the person who built it and tends it daily. Nobody else has run it yet, so the same complaints about setup and upkeep could fairly be made of it.</li>
+</ul>
+<aside aria-label="What we make" class="starlight-aside starlight-aside--tip"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path fill-rule="evenodd" d="M1.44 8.855v-.001l3.527-3.516c.34-.344.802-.541 1.285-.548h6.649l.947-.947c3.07-3.07 6.207-3.072 7.62-2.868a1.821 1.821 0 0 1 1.557 1.557c.204 1.413.203 4.55-2.868 7.62l-.946.946v6.649a1.845 1.845 0 0 1-.549 1.286l-3.516 3.528a1.844 1.844 0 0 1-3.11-.944l-.858-4.275-4.52-4.52-2.31-.463-1.964-.394A1.847 1.847 0 0 1 .98 10.693a1.843 1.843 0 0 1 .46-1.838Zm5.379 2.017-3.873-.776L6.32 6.733h4.638l-4.14 4.14Zm8.403-5.655c2.459-2.46 4.856-2.463 5.89-2.33.134 1.035.13 3.432-2.329 5.891l-6.71 6.71-3.561-3.56 6.71-6.711Zm-1.318 15.837-.776-3.873 4.14-4.14v4.639l-3.364 3.374Z" clip-rule="evenodd"/><path d="M9.318 18.345a.972.972 0 0 0-1.86-.561c-.482 1.435-1.687 2.204-2.934 2.619a8.22 8.22 0 0 1-1.23.302c.062-.365.157-.79.303-1.229.415-1.247 1.184-2.452 2.62-2.935a.971.971 0 1 0-.62-1.842c-.12.04-.236.084-.35.13-2.02.828-3.012 2.588-3.493 4.033a10.383 10.383 0 0 0-.51 2.845l-.001.016v.063c0 .536.434.972.97.972H2.24a7.21 7.21 0 0 0 .878-.065c.527-.063 1.248-.19 2.02-.447 1.445-.48 3.205-1.472 4.033-3.494a5.828 5.828 0 0 0 .147-.407Z"/></svg>What we make</p><div class="starlight-aside__content"><p>Tugboat is our attempt at the combination that is hard to find: follow-through as a system, records you can read on your own computer, and nothing sent in your name without your tap on the exact text. It runs for its builder and is not yet installable by anyone else. <a href="/guide/kit/where-it-stands/">Where Tugboat stands</a>.</p></div></aside>
+<div class="sl-heading-wrapper level-h2"><h2 id="sources-and-dates">Sources and dates</h2><a class="sl-anchor-link" href="#sources-and-dates"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Sources and dates”</span></a></div>
+<p>The self-hosted systems were read from their own documentation and code on November 10, 2026; the pages are listed at the end of <a href="/guide/landscape/feature-matrix/">the feature matrix</a>. The hosted and built-in products were last checked on November 9, 2026. Vendor claims were not tested.</p>
+<ul>
+<li>Poke: <a href="https://www.layer3labs.io/guides/poke-ai-explained">Layer3 Labs</a>, <a href="https://pally.com/compare/pally-vs-poke">Pally</a>, <a href="https://blog.saner.ai/best-poke-alternatives/">Saner</a></li>
+<li>Martin: <a href="https://aiagentrank.io/agent/martin/pricing">AI Agent Rank</a>, <a href="https://www.saasworthy.com/product/try-martin/pricing">SaaSworthy</a></li>
+<li>Lindy, Sintra, Marblism: <a href="https://www.lowcode.agency/blog/best-ai-employee-platforms-for-small-business">LowCode Agency</a>, <a href="https://www.lowcode.agency/blog/marblism-vs-lindy-vs-motion-ai">Marblism vs Lindy vs Motion</a>, <a href="https://www.eesel.ai/blog/sintra-ai-pricing">eesel on Sintra pricing</a>, <a href="https://readywhen.ai/blog/best-ai-chief-of-staff-tools-2026">ReadyWhen</a></li>
+<li>Claude: <a href="https://dev.to/ji_ai/claude-dispatch-send-a-text-come-back-to-finished-work-on-your-desktop-59me">Dispatch</a>, <a href="https://alejandrorioja.com/claude-cowork-scheduled-tasks-setup-guide/">scheduled tasks guide</a>, <a href="https://claudeissues.com/issue/91758-cowork-scheduled-task-routine-fires-on-schedule-but-takes-hours-to-actually-exec">late-run report</a></li>
+<li>ChatGPT Pulse: <a href="https://techcrunch.com/2025/09/25/openai-launches-chatgpt-pulse-to-proactively-write-you-morning-briefs">TechCrunch</a>, <a href="https://venturebeat.com/ai/chatgpt-pulse-delivers-daily-personalized-research-moving-ai-from-reactive">VentureBeat</a></li>
+<li>Gemini: reported in development (PCWorld via Android Authority, May 2026); launch not confirmed in our search</li>
+<li>Grok Bot: <a href="https://x.ai/news/introducing-grok-bot">x.ai</a>, <a href="https://forklog.com/en/news/spacexai-launches-grok-bot-messenger-with-ai-agents">Forklog</a></li>
+<li>Complaints: <a href="https://www.eesel.ai/blog/sintra-ai-review">eesel on Sintra</a>, <a href="https://crevio.co/blog/is-sintra-ai-legit">Crevio on Sintra</a>, <a href="https://blog.saner.ai/lindy-ai-reviews/">Saner on Lindy</a>, <a href="https://www.trustpilot.com/review/lindy.ai?page=1">Lindy on Trustpilot</a>, <a href="https://www.roborhythms.com/?p=30151">Robo Rhythms on OpenClaw</a>, <a href="https://shuvrojit.substack.com/p/is-openclaw-just-a-hype">Is OpenClaw just a hype?</a>, <a href="https://hn.jakechampion.name/reader/https://blog.nishantsoni.com/p/ive-seen-a-thousand-openclaw-deploys">on OpenClaw’s memory</a>, <a href="https://hackernoon.com/openclaw-after-the-hype-a-real-world-test-of-a-do-anything-ai-assistant">HackerNoon</a>, <a href="https://www.eesel.ai/blog/hermes-agent-review">eesel on Hermes Agent</a>, <a href="https://www.eesel.ai/blog/paperclip-ai-review">eesel on Paperclip</a></li>
+</ul>
+</div><footer class="sl-flex astro-u6rkd2lx"><div class="meta sl-flex astro-u6rkd2lx"></div><div class="pagination-links print:hidden astro-q2h5ybd7" dir="ltr"><a href="/guide/landscape/feature-matrix/" rel="prev" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-q2h5ybd7">Previous<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">Feature matrix</span></span></a><a href="/guide/team/virtual-employee/" rel="next" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-q2h5ybd7">Next<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">A virtual employee</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

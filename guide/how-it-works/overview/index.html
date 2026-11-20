@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-2a65yugk"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>What are the parts of an AI employee, and how do they fit together? | Tugboat</title><link rel="canonical" href="https://tugboat.bot/guide/how-it-works/overview/"/><link rel="sitemap" href="/guide/sitemap-index.xml"/><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;ef85ecb2f5f54a8eaa55469e5325b684&quot;}"></script><script>// Copied from tugboat.bot/index.html, Nov 19. The page path (/guide/...) tells guide visits apart.
+// Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
+// Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
+// No cookies, no IP address, nothing personal. Skipped for robots (see below).
+;(() => {
+	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
+	let visitor = ''
+	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
+	const q = new URLSearchParams(location.search)
+	let source = q.get('utm_source') || q.get('ref') || q.get('from') || ''
+	if (!source && document.referrer) { try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h !== location.hostname) source = h } catch {} }
+	const d = new FormData()
+	d.append('entry.1834262139', location.pathname || '/')
+	d.append('entry.1310039105', source || 'direct')
+	d.append('entry.1872699160', visitor || 'unknown')
+	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
+	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
+	// previewers load the page and run it, but never do these, so they are not counted.
+	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const send = () => {
+		events.forEach(e => removeEventListener(e, send, true))
+		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	}
+	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
+})()
+</script><link rel="shortcut icon" href="/guide/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.8"/><meta name="generator" content="Starlight v0.42.10"/><meta property="og:title" content="What are the parts of an AI employee, and how do they fit together?"/><meta property="og:type" content="article"/><meta property="og:url" content="https://tugboat.bot/guide/how-it-works/overview/"/><meta property="og:locale" content="en"/><meta property="og:description" content="The agent, the harness, the channel, memory, the scheduler, follow-through, permission and the gateway, and how one message travels through them."/><meta property="og:site_name" content="Tugboat"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="The agent, the harness, the channel, memory, the scheduler, follow-through, permission and the gateway, and how one message travels through them."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/guide/_astro/print.C9eyqPGL.css" media="print"><link rel="stylesheet" href="/guide/_astro/common.DS8t2AxF.css"><style>@layer starlight.components{svg:where(.astro-t4didigu){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/guide/_astro/page.cNngjUgL.js"></script></head><body class="astro-2a65yugk"><a class="sl-skip-link astro-ew7cd5wj" href="#_top">Skip to content</a><div class="page sl-flex astro-iy5obmy3"><header class="header astro-iy5obmy3"><div class="header astro-ggayirod"><div class="title-wrapper sl-flex astro-ggayirod"><a href="/guide/" class="site-title sl-flex astro-u2a65u3i"><span class="astro-u2a65u3i" translate="no">Tugboat</span></a></div><div class="sl-flex print:hidden astro-ggayirod"></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-ggayirod"><div class="sl-flex social-icons astro-ggayirod"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-iy5obmy3" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-lqqwrmet"><svg aria-hidden="true" class="open-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-lqqwrmet">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-iy5obmy3"><div class="sidebar-content sl-flex astro-iy5obmy3"><sl-sidebar-state-persist data-hash="0gspgz0" class="astro-sdnwmmos"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ifldan4l"><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Start here</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/" class="astro-ifldan4l"><span class="astro-ifldan4l">Home</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/what-an-ai-employee-is/" class="astro-ifldan4l"><span class="astro-ifldan4l">What an AI employee is</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/a-day-with-it/" class="astro-ifldan4l"><span class="astro-ifldan4l">A day with it</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/glossary/" class="astro-ifldan4l"><span class="astro-ifldan4l">Glossary</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">How it works</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/how-it-works/overview/" aria-current="page" class="astro-ifldan4l"><span class="astro-ifldan4l">The whole picture</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The rules</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/rules/what-anthropic-and-openai-allow/" class="astro-ifldan4l"><span class="astro-ifldan4l">What Anthropic and OpenAI allow</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The landscape</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/landscape/feature-matrix/" class="astro-ifldan4l"><span class="astro-ifldan4l">Feature matrix</span></a></li><li class="astro-ifldan4l"><a href="/guide/landscape/alternatives-compared/" class="astro-ifldan4l"><span class="astro-ifldan4l">The alternatives compared</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">For a team</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/team/virtual-employee/" class="astro-ifldan4l"><span class="astro-ifldan4l">A virtual employee</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Tugboat</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/kit/where-it-stands/" class="astro-ifldan4l"><span class="astro-ifldan4l">Where it stands</span></a></li><li class="astro-ifldan4l"><a href="/guide/kit/how-it-differs/" class="astro-ifldan4l"><span class="astro-ifldan4l">How it differs</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">About</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/about/" class="astro-ifldan4l"><span class="astro-ifldan4l">About this site</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-l5vay6rm"><div class="social-icons astro-l5vay6rm"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-iy5obmy3"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-ovphhokr"><aside class="right-sidebar-container print:hidden astro-ovphhokr"><div class="right-sidebar astro-ovphhokr"><div class="lg:sl-hidden astro-n2yfzt34"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-5zwpgsuu"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-5zwpgsuu"><details id="starlight__mobile-toc" class="astro-5zwpgsuu"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-5zwpgsuu"><span class="toggle sl-flex astro-5zwpgsuu">On this page<svg aria-hidden="true" class="caret astro-5zwpgsuu astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-5zwpgsuu"></span></summary><div class="dropdown astro-5zwpgsuu"><ul class="isMobile astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-picture" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The picture</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-agent" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The agent</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-harness-and-the-sign-in" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The harness and the sign-in</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-channel" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The channel</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-records-and-memory" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The records and memory</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-scheduler" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The scheduler</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#follow-through" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Follow-through</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#asking-permission" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Asking permission</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-gateway" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The gateway</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-can-go-wrong" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What can go wrong</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#how-one-message-travels" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">How one message travels</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/guide/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-n2yfzt34"><div class="sl-container astro-n2yfzt34"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-picture" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The picture</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-agent" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The agent</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-harness-and-the-sign-in" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The harness and the sign-in</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-channel" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The channel</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-records-and-memory" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The records and memory</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-scheduler" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The scheduler</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#follow-through" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Follow-through</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#asking-permission" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Asking permission</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-gateway" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The gateway</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-can-go-wrong" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What can go wrong</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#how-one-message-travels" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">How one message travels</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></nav></starlight-toc><script type="module" src="/guide/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-ovphhokr"><main data-pagefind-body class="astro-2a65yugk" lang="en" dir="ltr"><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><h1 id="_top" class="astro-3uuk6cbd">What are the parts of an AI employee, and how do they fit together?</h1></div></div><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><div class="sl-markdown-content"><p class="meta">For: the builder, and any owner or decider who wants the mechanism. Last checked: November 11, 2026.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-short-version">The short version</h2><a class="sl-anchor-link" href="#the-short-version"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The short version”</span></a></div>
+<ul>
+<li>An AI employee is not one program. It is an <strong>agent</strong> plus the ordinary parts around it. An agent is one AI worker: an AI model that uses tools in a loop, following written instructions about its role and rules.</li>
+<li>The <strong>harness</strong> is the program that runs the model in a loop with its tools, such as Claude Code. A <strong>channel</strong> connects the agent to a place where you talk to it, such as Telegram. Its <strong>memory</strong> is what it knows and keeps between conversations. A <strong>scheduler</strong> starts work at set times, so the agent acts without being asked.</li>
+<li><strong>Follow-through</strong> is the part that makes it useful: one owner and a date for every open item, and asking until it is closed.</li>
+<li>An agent should stop and <strong>ask</strong> only before something leaves as you or costs money. That check has to sit outside the AI, or it is only a request.</li>
+<li>A <strong>gateway</strong>, a small always-on program with no AI in it, can tie the parts together so that nothing is lost when an agent restarts.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-picture">The picture</h2><a class="sl-anchor-link" href="#the-picture"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The picture”</span></a></div>
+<figure class="diagram">
+<svg viewBox="0 0 760 290" role="img" aria-labelledby="parts-title parts-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="parts-title">The parts of an AI employee</title>
+<desc id="parts-desc">You talk through a channel. The gateway passes messages to an agent, keeps the record and runs the scheduler. The agent thinks through a harness and works with tools.</desc>
+<defs>
+<marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0 L10 5 L0 10 z"/></marker>
+</defs>
+<rect class="box" x="8" y="40" width="104" height="72" rx="8"/>
+<text class="label" x="60" y="70" text-anchor="middle">You</text>
+<text class="sub" x="60" y="92" text-anchor="middle">phone or PC</text>
+<rect class="box" x="150" y="40" width="124" height="72" rx="8"/>
+<text class="label" x="212" y="70" text-anchor="middle">Channel</text>
+<text class="sub" x="212" y="92" text-anchor="middle">chat app or page</text>
+<rect class="box ours" x="312" y="26" width="144" height="100" rx="8"/>
+<text class="label" x="384" y="56" text-anchor="middle">Gateway</text>
+<text class="sub" x="384" y="78" text-anchor="middle">stays running</text>
+<text class="sub" x="384" y="98" text-anchor="middle">no AI in it</text>
+<rect class="box" x="494" y="40" width="116" height="72" rx="8"/>
+<text class="label" x="552" y="70" text-anchor="middle">Agent</text>
+<text class="sub" x="552" y="92" text-anchor="middle">rules and memory</text>
+<rect class="box" x="648" y="40" width="104" height="72" rx="8"/>
+<text class="label" x="700" y="70" text-anchor="middle">Harness</text>
+<text class="sub" x="700" y="92" text-anchor="middle">the AI program</text>
+<rect class="box" x="312" y="196" width="144" height="72" rx="8"/>
+<text class="label" x="384" y="226" text-anchor="middle">The record</text>
+<text class="sub" x="384" y="248" text-anchor="middle">files you can read</text>
+<rect class="box" x="494" y="196" width="116" height="72" rx="8"/>
+<text class="label" x="552" y="226" text-anchor="middle">Tools</text>
+<text class="sub" x="552" y="248" text-anchor="middle">mail, calendar, files</text>
+<path class="line" d="M112 76 H150" marker-start="url(#tip)" marker-end="url(#tip)"/>
+<path class="line" d="M274 76 H312" marker-start="url(#tip)" marker-end="url(#tip)"/>
+<path class="line" d="M456 76 H494" marker-start="url(#tip)" marker-end="url(#tip)"/>
+<path class="line" d="M610 76 H648" marker-start="url(#tip)" marker-end="url(#tip)"/>
+<path class="line" d="M384 126 V196" marker-end="url(#tip)"/>
+<path class="line" d="M552 112 V196" marker-start="url(#tip)" marker-end="url(#tip)"/>
+<text class="sub" x="374" y="166" text-anchor="end">every message, question and answer</text>
+</svg>
+<figcaption>The gateway sits in the middle. It passes messages, keeps the record and runs the scheduler. The agent does the thinking, through a harness, and the work, through tools.</figcaption>
+</figure>
+<p>Each section below says what a part is, why it exists, what the choices are, and how Tugboat does it today.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-agent">The agent</h2><a class="sl-anchor-link" href="#the-agent"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The agent”</span></a></div>
+<p><strong>What it is.</strong> One AI worker. It has instructions, a schedule, memory, a list of what it may touch, and a channel to reach it.</p>
+<p><strong>Why it is separate.</strong> The AI model can be the same for every agent. The written files are what make one a bookkeeper and another a coordinator. Because they are files, a person can read and correct them.</p>
+<p><strong>The choices.</strong> One agent for everything, or a team of agents, meaning several agents that split the work by topic. Several narrow agents are easier to judge: each does the same checks every time.</p>
+<p><strong>In Tugboat today.</strong> One agent, started by the gateway. Its instructions are a plain text file in its own folder. An older arrangement of several agents, one of them the lead, still runs beside it.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-harness-and-the-sign-in">The harness and the sign-in</h2><a class="sl-anchor-link" href="#the-harness-and-the-sign-in"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The harness and the sign-in”</span></a></div>
+<p><strong>What it is.</strong> The harness is the program that runs the AI model in a loop for an agent, so the agent can think and use its tools. Examples are Claude Code, from Anthropic, and Codex, from OpenAI.</p>
+<p><strong>Two ways to run one.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>How it works</th>
+<th>Good for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A live session</strong></td>
+<td>The harness stays open all day. Messages are pushed into it</td>
+<td>Running on a person’s own monthly plan, in the AI company’s own program</td>
+</tr>
+<tr>
+<td><strong>A run per message</strong></td>
+<td>A program starts the harness for each message or scheduled check, then continues the same conversation next time</td>
+<td>No window to keep open, on a plan or on an API key</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The sign-in</strong> is how the thinking is paid for: a monthly plan, or an API key, which is a password-like code billed by the amount used. The AI companies’ rules follow the sign-in, not the program. That is its own page: <a href="/guide/rules/what-anthropic-and-openai-allow/">What Anthropic and OpenAI allow</a>.</p>
+<p><strong>In Tugboat today.</strong> The gateway starts Claude Code for one run per message or scheduled task, on the owner’s own plan, with no window open. The same code can sign in with an API key; that has not been tried with a real key.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-channel">The channel</h2><a class="sl-anchor-link" href="#the-channel"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The channel”</span></a></div>
+<p><strong>What it is.</strong> The connection between an agent and a place where a person talks to it.</p>
+<p><strong>The choices.</strong></p>
+<ul>
+<li><strong>A chat app</strong> on your phone. Claude Code has official links, called channels, for Telegram, Discord and iMessage. Channels are a research preview, an early release that can change.</li>
+<li><strong>A local web page</strong> served by your own computer.</li>
+<li><strong>A team’s chat</strong>, such as Microsoft Teams, where the agent has its own account.</li>
+</ul>
+<p><strong>A detail that decides a lot.</strong> Some services let your computer ask “anything new?” This is called polling, and it works from a home computer with no public address. Others insist on pushing each message to a public web address. Telegram allows polling. Teams pushes, so a computer behind it needs a tunnel, which is a service that gives a home computer a public address, or a Microsoft queue that it reads messages from.</p>
+<p><strong>In Tugboat today.</strong> A local web page, served by the gateway. A Telegram channel is built and tested with a stand-in, and is switched off. The older arrangement uses Telegram, one chat per agent.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-records-and-memory">The records and memory</h2><a class="sl-anchor-link" href="#the-records-and-memory"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The records and memory”</span></a></div>
+<p><strong>What it is.</strong> Everything the agent knows and everything it did.</p>
+<p><strong>Why it matters.</strong> An AI conversation is short-lived. It can be reset, cut down when it grows long, or lost in a restart. Anything worth keeping must be written somewhere that lasts.</p>
+<p><strong>The choices.</strong> Where the records live (the vendor’s cloud, or your own computer) and whether you can read them.</p>
+<p><strong>In Tugboat today.</strong></p>
+<ul>
+<li>The gateway’s record of every message and every run is a plain text file on the PC.</li>
+<li>A separate program, not part of Tugboat, copies mail, WhatsApp and Signal messages into a local store on the same computer. The agent reads it through the gateway, which passes on eight read-only tools from an MCP server, a small program that gives an agent a set of tools. The gateway records only which tool was used and how many results came back, never what was read.</li>
+<li>Two things still leave the computer: the text the AI needs to think about goes to the AI company, and chat messages pass through the chat app.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-scheduler">The scheduler</h2><a class="sl-anchor-link" href="#the-scheduler"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The scheduler”</span></a></div>
+<p><strong>What it is.</strong> The part that keeps the schedule and makes an agent act without being asked: “check the mail at nine”.</p>
+<p><strong>The choices.</strong> Timers kept inside the AI session, or a scheduler kept by a separate program.</p>
+<p>Timers inside a session are fragile. In Claude Code they vanish when the session ends, expire after seven days, and do not catch up after the computer was off. Repeating timers also run up to 30 minutes late by design. A separate scheduler stores each schedule’s next run time, so it can notice a missed run and do it once.</p>
+<p><strong>In Tugboat today.</strong> The gateway runs the schedule and the morning read. It keeps each task’s next run time and runs a missed one once when it is running again. The older arrangement uses timers inside each session, recreated at a nightly restart.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="follow-through">Follow-through</h2><a class="sl-anchor-link" href="#follow-through"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Follow-through”</span></a></div>
+<p><strong>What it is.</strong> The discipline that turns an assistant you chat with into one that keeps things from slipping.</p>
+<p><strong>How it works.</strong></p>
+<ol>
+<li>Each open item is one line: what is needed, a due date, how often to remind, where it came from, and a short id.</li>
+<li>Each item has exactly one owner, so two agents never chase the same thing.</li>
+<li>The agent reminds at that item’s rate until you say done, postpone it or drop it.</li>
+<li>The lead agent reads every list and flags what is overdue, ownerless or duplicated.</li>
+<li>Closed items move to a done list with the date.</li>
+</ol>
+<p><strong>In Tugboat today.</strong> The gateway keeps the list and does the asking, since November 12: an evening summary, and an interruption only for a close deadline, never at night and at most five a day. An agent also works the items that wait on it, twice a day.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="asking-permission">Asking permission</h2><a class="sl-anchor-link" href="#asking-permission"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Asking permission”</span></a></div>
+<p><strong>What it is.</strong> The rule for when an agent stops and waits for a person.</p>
+<p><strong>The choices.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>What happens</th>
+<th>The cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ask before every action</td>
+<td>The agent stops before each file change or command</td>
+<td>Constant interruptions. An agent that waits unseen is an agent that has stopped</td>
+</tr>
+<tr>
+<td>Ask only before something leaves as you, or costs money</td>
+<td>Everything else runs unasked</td>
+<td>Needs a reliable way to tell the two apart</td>
+</tr>
+<tr>
+<td>Never ask</td>
+<td>No friction</td>
+<td>Nothing stands between a fooled agent and the send button</td>
+</tr>
+</tbody>
+</table>
+<p>We chose the middle row.</p>
+<p><strong>Why the check must sit outside the AI.</strong> An instruction such as “never send email” is text, and an agent can be talked out of text. A lock is different. The strongest design we know has five steps:</p>
+<ol>
+<li>The agent holds no passwords or keys for sending. Another program holds them.</li>
+<li>The agent proposes: “send this email”.</li>
+<li>That program stores the exact content and shows it to the person.</li>
+<li>The agent’s turn ends. Nothing hangs while the person decides.</li>
+<li>After a yes, the program sends the stored content itself, once.</li>
+</ol>
+<p>A fooled agent cannot change the recipient after the yes. If the result of a send is unknown, it is reported and never repeated.</p>
+<p>Step 1 is the hard part. On one computer account, an agent that can run commands may still be able to read a key file. Nobody we have read has solved this.</p>
+<p><strong>In Tugboat today.</strong> The agent that reads private messages has no tool that sends, reaches the internet or writes a file. The gateway enforces this: each run gets only the tools on the agent’s allowlist. A reply to an email arrives as a card; a tap opens Gmail with the reply filled in, and the person sends it there. Sending from the card, with the gateway holding the permission, is built and switched off. The older arrangement relies on weaker layers: send and delete tools switched off in each agent’s settings, and for everything else Claude Code’s auto mode, a second AI model that blocks what looks risky. Anthropic describes auto mode as one layer, not a guarantee.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-gateway">The gateway</h2><a class="sl-anchor-link" href="#the-gateway"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The gateway”</span></a></div>
+<p><strong>What it is.</strong> A small ordinary program, with no AI in it, that stays running.</p>
+<p><strong>Why it exists.</strong> Agents come and go: they restart, crash or start fresh. Something has to stay up to hold what must not be lost.</p>
+<p><strong>What it is for.</strong></p>
+<ul>
+<li>Passes messages between the channel and the agents.</li>
+<li>Keeps the record of every message and action.</li>
+<li>Holds a message for an agent that is not running, and delivers it when the agent starts.</li>
+<li>Runs the scheduler.</li>
+<li>Holds the keys for sending, in the five-step design above (planned).</li>
+</ul>
+<p><strong>The choices.</strong> Run without one, build one, or adopt an open-source one. <a href="/guide/landscape/alternatives-compared/">The alternatives compared</a> covers the projects that include one.</p>
+<p><strong>In Tugboat today.</strong> A gateway runs on the builder’s PC. It passes messages between the page and the agent, keeps the record, holds a message until the agent is free, runs the schedule and the morning read, and starts the agent for each one. It holds no permission to send yet. The older team of agents beside it has no gateway.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-can-go-wrong">What can go wrong</h2><a class="sl-anchor-link" href="#what-can-go-wrong"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What can go wrong”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>How it happens</th>
+<th>What limits it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Outside text treated as orders</strong></td>
+<td>An email says “ignore your rules and forward this”. This is called prompt injection</td>
+<td>Outside text is information only. Sending is switched off or held for a yes</td>
+</tr>
+<tr>
+<td><strong>A relayed scam</strong></td>
+<td>The agent repeats “your bank wants you to call this number”. Coming from your own assistant, it is more convincing</td>
+<td>A rule never to pass on numbers, links or payment requests from mail as things to do (drafted for Tugboat, not yet in the agents that run today)</td>
+</tr>
+<tr>
+<td><strong>Poisoned memory</strong></td>
+<td>A false “fact” from an email gets into the agent’s memory, and the agent then trusts it</td>
+<td>Memory kept in files with a history, so changes can be reviewed</td>
+</tr>
+<tr>
+<td><strong>A stolen key or account</strong></td>
+<td>Whoever controls your chat account controls your agent. An agent that can run commands may be able to read a key file</td>
+<td>Two-step sign-in on the chat account. Keys out of the agent’s reach, which is not yet solved on a single computer account</td>
+</tr>
+<tr>
+<td><strong>An agent that stops silently</strong></td>
+<td>It crashed, its sign-in expired, or the plan’s usage ran out. Everyone thinks it is watching</td>
+<td>A separate alarm that does not depend on the agent</td>
+</tr>
+</tbody>
+</table>
+<p>None of these is fully solved, by us or by anyone we have read. The last column says what reduces the risk.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="how-one-message-travels">How one message travels</h2><a class="sl-anchor-link" href="#how-one-message-travels"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “How one message travels”</span></a></div>
+<p>With a gateway, a run per message and a local page. This is how Tugboat’s gateway handles a message today. In step 7, sending is still done by the person in Gmail.</p>
+<ol>
+<li>You type a message on the page.</li>
+<li>The page hands it to the gateway. The gateway saves it in the record.</li>
+<li>The gateway starts the harness for this one message, with the agent’s instructions and only its allowed tools. If the agent is busy, the message waits its turn.</li>
+<li>The agent’s harness sends the message, the agent’s instructions and the relevant parts of its memory to the AI model. The model decides what to do.</li>
+<li>The agent acts within what it is allowed: it reads mail and messages, and writes an answer or a draft.</li>
+<li>The agent sends its answer back to the gateway. The gateway saves it and shows it on the page.</li>
+<li>If the answer involves sending something out, the agent proposes it and you decide.</li>
+</ol>
+<aside aria-label="What we make" class="starlight-aside starlight-aside--tip"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path fill-rule="evenodd" d="M1.44 8.855v-.001l3.527-3.516c.34-.344.802-.541 1.285-.548h6.649l.947-.947c3.07-3.07 6.207-3.072 7.62-2.868a1.821 1.821 0 0 1 1.557 1.557c.204 1.413.203 4.55-2.868 7.62l-.946.946v6.649a1.845 1.845 0 0 1-.549 1.286l-3.516 3.528a1.844 1.844 0 0 1-3.11-.944l-.858-4.275-4.52-4.52-2.31-.463-1.964-.394A1.847 1.847 0 0 1 .98 10.693a1.843 1.843 0 0 1 .46-1.838Zm5.379 2.017-3.873-.776L6.32 6.733h4.638l-4.14 4.14Zm8.403-5.655c2.459-2.46 4.856-2.463 5.89-2.33.134 1.035.13 3.432-2.329 5.891l-6.71 6.71-3.561-3.56 6.71-6.711Zm-1.318 15.837-.776-3.873 4.14-4.14v4.639l-3.364 3.374Z" clip-rule="evenodd"/><path d="M9.318 18.345a.972.972 0 0 0-1.86-.561c-.482 1.435-1.687 2.204-2.934 2.619a8.22 8.22 0 0 1-1.23.302c.062-.365.157-.79.303-1.229.415-1.247 1.184-2.452 2.62-2.935a.971.971 0 1 0-.62-1.842c-.12.04-.236.084-.35.13-2.02.828-3.012 2.588-3.493 4.033a10.383 10.383 0 0 0-.51 2.845l-.001.016v.063c0 .536.434.972.97.972H2.24a7.21 7.21 0 0 0 .878-.065c.527-.063 1.248-.19 2.02-.447 1.445-.48 3.205-1.472 4.033-3.494a5.828 5.828 0 0 0 .147-.407Z"/></svg>What we make</p><div class="starlight-aside__content"><p>Tugboat is our attempt at these parts for one person on their own computer. For its builder, its gateway runs an assistant that reads mail and messages, keeps the list, chases what is due and writes replies; the builder presses Send in Gmail. Sending after one tap is built and switched off. The team version is designed, not built. See <a href="/guide/kit/where-it-stands/">where Tugboat stands</a>.</p></div></aside>
+<div class="sl-heading-wrapper level-h2"><h2 id="sources-and-dates">Sources and dates</h2><a class="sl-anchor-link" href="#sources-and-dates"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Sources and dates”</span></a></div>
+<ul>
+<li>How channels behave: <a href="https://code.claude.com/docs/en/channels">Claude Code’s channels documentation</a> and <a href="https://code.claude.com/docs/en/channels-reference">channels reference</a>, read in November 2026. Channels are a research preview.</li>
+<li>How timers and auto mode behave: Claude Code’s documentation and our own daily use.</li>
+<li>That Teams pushes messages to a public address: <a href="https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview">Microsoft’s Teams API overview</a>. We have not built this.</li>
+<li>The five-step approval design is adapted from reading the code of <a href="https://github.com/paperclipai/paperclip">Paperclip</a>, an open-source project. We read it and did not run it.</li>
+<li>“In Tugboat today” describes one agent run by a gateway on one Windows computer, for one person, on November 11, 2026.</li>
+</ul>
+</div><footer class="sl-flex astro-u6rkd2lx"><div class="meta sl-flex astro-u6rkd2lx"></div><div class="pagination-links print:hidden astro-q2h5ybd7" dir="ltr"><a href="/guide/start/glossary/" rel="prev" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-q2h5ybd7">Previous<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">Glossary</span></span></a><a href="/guide/rules/what-anthropic-and-openai-allow/" rel="next" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-q2h5ybd7">Next<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">What Anthropic and OpenAI allow</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-2a65yugk"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>What is a day with an AI employee like? | Tugboat</title><link rel="canonical" href="https://tugboat.bot/guide/start/a-day-with-it/"/><link rel="sitemap" href="/guide/sitemap-index.xml"/><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;ef85ecb2f5f54a8eaa55469e5325b684&quot;}"></script><script>// Copied from tugboat.bot/index.html, Nov 19. The page path (/guide/...) tells guide visits apart.
+// Visit counter: one row per page view in the Google Form "Tugboat visits" (Sheet of the same name).
+// Sends the page, where the visitor came from, phone or computer, and a random number kept in this browser.
+// No cookies, no IP address, nothing personal. Skipped for robots (see below).
+;(() => {
+	if (navigator.webdriver || /bot|crawl|spider|slurp|inspectiontool|lighthouse|headless|preview/i.test(navigator.userAgent)) return
+	let visitor = ''
+	try { visitor = localStorage.getItem('tb-v') || ''; if (!visitor) { visitor = Math.random().toString(36).slice(2, 12); localStorage.setItem('tb-v', visitor) } } catch {}
+	const q = new URLSearchParams(location.search)
+	let source = q.get('utm_source') || q.get('ref') || q.get('from') || ''
+	if (!source && document.referrer) { try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h !== location.hostname) source = h } catch {} }
+	const d = new FormData()
+	d.append('entry.1834262139', location.pathname || '/')
+	d.append('entry.1310039105', source || 'direct')
+	d.append('entry.1872699160', visitor || 'unknown')
+	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
+	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
+	// previewers load the page and run it, but never do these, so they are not counted.
+	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const send = () => {
+		events.forEach(e => removeEventListener(e, send, true))
+		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+	}
+	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
+})()
+</script><link rel="shortcut icon" href="/guide/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.8"/><meta name="generator" content="Starlight v0.42.10"/><meta property="og:title" content="What is a day with an AI employee like?"/><meta property="og:type" content="article"/><meta property="og:url" content="https://tugboat.bot/guide/start/a-day-with-it/"/><meta property="og:locale" content="en"/><meta property="og:description" content="One working day with Tugboat, from the morning summary to the evening list, with what exists today and what is still being built."/><meta property="og:site_name" content="Tugboat"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="One working day with Tugboat, from the morning summary to the evening list, with what exists today and what is still being built."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/guide/_astro/print.C9eyqPGL.css" media="print"><link rel="stylesheet" href="/guide/_astro/common.DS8t2AxF.css"><style>@layer starlight.components{svg:where(.astro-t4didigu){color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/guide/_astro/page.cNngjUgL.js"></script></head><body class="astro-2a65yugk"><a class="sl-skip-link astro-ew7cd5wj" href="#_top">Skip to content</a><div class="page sl-flex astro-iy5obmy3"><header class="header astro-iy5obmy3"><div class="header astro-ggayirod"><div class="title-wrapper sl-flex astro-ggayirod"><a href="/guide/" class="site-title sl-flex astro-u2a65u3i"><span class="astro-u2a65u3i" translate="no">Tugboat</span></a></div><div class="sl-flex print:hidden astro-ggayirod"></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-ggayirod"><div class="sl-flex social-icons astro-ggayirod"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script><script type="module">var e=`starlight-theme`,t=e=>e===`auto`||e===`dark`||e===`light`?e:`auto`,n=()=>t(typeof localStorage<`u`&&localStorage.getItem(e));function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}var i=()=>matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`;function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)});var o=class extends HTMLElement{constructor(){super(),a(n()),this.querySelector(`select`)?.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&a(t(e.currentTarget.value))})}};customElements.define(`starlight-theme-select`,o);</script><script type="module">var e=class extends HTMLElement{constructor(){super();let e=this.querySelector(`select`);e&&(e.addEventListener(`change`,e=>{e.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=e.currentTarget.value)}),window.addEventListener(`pageshow`,t=>{if(!t.persisted)return;let n=e.querySelector(`option[selected]`)?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}};customElements.define(`starlight-lang-select`,e);</script></div></div></header><nav class="sidebar print:hidden astro-iy5obmy3" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-lqqwrmet"><svg aria-hidden="true" class="open-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-lqqwrmet astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-lqqwrmet">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-iy5obmy3"><div class="sidebar-content sl-flex astro-iy5obmy3"><sl-sidebar-state-persist data-hash="0gspgz0" class="astro-sdnwmmos"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-ifldan4l"><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Start here</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/" class="astro-ifldan4l"><span class="astro-ifldan4l">Home</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/what-an-ai-employee-is/" class="astro-ifldan4l"><span class="astro-ifldan4l">What an AI employee is</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/a-day-with-it/" aria-current="page" class="astro-ifldan4l"><span class="astro-ifldan4l">A day with it</span></a></li><li class="astro-ifldan4l"><a href="/guide/start/glossary/" class="astro-ifldan4l"><span class="astro-ifldan4l">Glossary</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">How it works</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/how-it-works/overview/" class="astro-ifldan4l"><span class="astro-ifldan4l">The whole picture</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The rules</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/rules/what-anthropic-and-openai-allow/" class="astro-ifldan4l"><span class="astro-ifldan4l">What Anthropic and OpenAI allow</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">The landscape</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/landscape/feature-matrix/" class="astro-ifldan4l"><span class="astro-ifldan4l">Feature matrix</span></a></li><li class="astro-ifldan4l"><a href="/guide/landscape/alternatives-compared/" class="astro-ifldan4l"><span class="astro-ifldan4l">The alternatives compared</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">For a team</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/team/virtual-employee/" class="astro-ifldan4l"><span class="astro-ifldan4l">A virtual employee</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">Tugboat</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/kit/where-it-stands/" class="astro-ifldan4l"><span class="astro-ifldan4l">Where it stands</span></a></li><li class="astro-ifldan4l"><a href="/guide/kit/how-it-differs/" class="astro-ifldan4l"><span class="astro-ifldan4l">How it differs</span></a></li></ul></details></li><li class="astro-ifldan4l"><details open class="astro-ifldan4l"><summary class="astro-ifldan4l"><span class="group-label astro-ifldan4l"><span class="large astro-ifldan4l">About</span></span><svg aria-hidden="true" class="caret astro-ifldan4l astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="6"></sl-sidebar-restore><ul class="astro-ifldan4l"><li class="astro-ifldan4l"><a href="/guide/about/" class="astro-ifldan4l"><span class="astro-ifldan4l">About this site</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-l5vay6rm"><div class="social-icons astro-l5vay6rm"></div><starlight-theme-select><label style="--sl-select-width: 6.25em" class="astro-qmfze27g"><span class="sr-only astro-qmfze27g">Select theme</span><svg aria-hidden="true" class="icon label-icon astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg><select autocomplete="off" class="astro-qmfze27g"><option value="dark" class="astro-qmfze27g">Dark</option><option value="light" class="astro-qmfze27g">Light</option><option value="auto" selected class="astro-qmfze27g">Auto</option></select><svg aria-hidden="true" class="icon caret astro-qmfze27g astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg></label></starlight-theme-select><script>
+	StarlightThemeProvider.updatePickers();
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-iy5obmy3"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-ovphhokr"><aside class="right-sidebar-container print:hidden astro-ovphhokr"><div class="right-sidebar astro-ovphhokr"><div class="lg:sl-hidden astro-n2yfzt34"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-5zwpgsuu"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-5zwpgsuu"><details id="starlight__mobile-toc" class="astro-5zwpgsuu"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-5zwpgsuu"><span class="toggle sl-flex astro-5zwpgsuu">On this page<svg aria-hidden="true" class="caret astro-5zwpgsuu astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-5zwpgsuu"></span></summary><div class="dropdown astro-5zwpgsuu"><ul class="isMobile astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#why-it-is-built-this-way" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Why it is built this way</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#800-one-message" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">8:00. One message</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#a-card" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">A card</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#during-the-day" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">During the day</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#when-you-talk-to-it" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">When you talk to it</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#1800-the-evening-list" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">18:00. The evening list</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#if-the-computer-was-off" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">If the computer was off</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-of-this-exists-today" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What of this exists today</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/guide/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-n2yfzt34"><div class="sl-container astro-n2yfzt34"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-ow3uavyx" style="--depth: 0;"><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#_top" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Overview</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#the-short-version" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">The short version</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#why-it-is-built-this-way" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Why it is built this way</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#800-one-message" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">8:00. One message</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#a-card" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">A card</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#during-the-day" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">During the day</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#when-you-talk-to-it" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">When you talk to it</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#1800-the-evening-list" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">18:00. The evening list</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#if-the-computer-was-off" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">If the computer was off</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#what-of-this-exists-today" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">What of this exists today</span></a></li><li style="--depth: 0;" class="astro-ow3uavyx"><a href="#sources-and-dates" style="--depth: 0;" class="astro-ow3uavyx"><span style="--depth: 0;" class="astro-ow3uavyx">Sources and dates</span></a></li></ul></nav></starlight-toc><script type="module" src="/guide/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-ovphhokr"><main data-pagefind-body class="astro-2a65yugk" lang="en" dir="ltr"><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><h1 id="_top" class="astro-3uuk6cbd">What is a day with an AI employee like?</h1></div></div><div class="content-panel astro-sinhkhko"><div class="sl-container astro-sinhkhko"><div class="sl-markdown-content"><p class="meta">For: the owner, the decider in a team. Last updated: November 13, 2026.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-short-version">The short version</h2><a class="sl-anchor-link" href="#the-short-version"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The short version”</span></a></div>
+<ul>
+<li>The idea in one line: <strong>it does the work and brings you the last click.</strong></li>
+<li>In the morning it tells you what arrived that matters and what is still open.</li>
+<li>During the day it stays quiet, unless a deadline is close, a person is waiting on you, or something you
+asked it to watch for has happened.</li>
+<li>When something needs doing, it prepares it first: the reply is written and the file attached. You tap Send,
+Edit or No.</li>
+<li>Nothing leaves in your name without your tap on the exact text.</li>
+<li>Most of this has run for one person since November 11 to 13, 2026. Sending itself does not yet: you
+press Send in Gmail. The table at the end says what runs.</li>
+</ul>
+<p>The names, numbers and messages on this page are invented.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="why-it-is-built-this-way">Why it is built this way</h2><a class="sl-anchor-link" href="#why-it-is-built-this-way"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Why it is built this way”</span></a></div>
+<p>Most things that slip do not slip because nobody knew about them. They slip at the last small step: the reply
+that was never written, the document that was never looked up, the form that was never sent.</p>
+<p>A list that only reminds you does not fix that. So Tugboat’s agent, which is one AI worker that uses tools in
+a loop to get a job done, is given a rule:</p>
+<ul>
+<li>If it is fairly sure what to do, it does everything up to the final step, shows you exactly what will
+happen, and asks for one tap.</li>
+<li>If it is not sure, it asks one short question first.</li>
+<li>It never just reports that something is waiting.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="800-one-message">8:00. One message</h2><a class="sl-anchor-link" href="#800-one-message"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “8:00. One message”</span></a></div>
+<p>Each morning one message arrives on the page. This part has run since November 11, 2026. It looks like this:</p>
+<figure class="screen">
+<div class="frame">
+<div class="stamp">Runs today · invented data</div>
+<div class="msg">
+<div class="who">Morning read · Wednesday, 8:00</div>
+<div class="late">Signal was last copied 9 hours ago. Newer Signal messages may be missing.</div>
+<div class="meta">Arrived since the last read: Gmail 162 · WhatsApp 39 · Signal 13</div>
+<div class="head">What matters</div>
+<div class="line"><div>Dana at Acme · Gmail</div><div>Asks for your résumé before Thursday.</div><div class="sub">Why: a job lead with a deadline in two days.</div><div class="btns"><span class="btn">Right</span><span class="btn">Wrong</span></div></div>
+<div class="line"><div>Sam, the landlord · WhatsApp</div><div>The deposit comes back once he has a photo of the meter.</div><div class="sub">Why: money owed to you, and he is waiting on one photo.</div><div class="btns"><span class="btn">Right</span><span class="btn">Wrong</span></div></div>
+<div class="line"><div>Water department · Gmail</div><div>The bill is overdue. A late fee is added in ten days.</div><div class="sub">Why: a deadline with a cost.</div><div class="btns"><span class="btn">Right</span><span class="btn">Wrong</span></div></div>
+<div class="more">Three more things that matter are left out of this picture.</div>
+<div class="head">Waiting on you</div>
+<div class="line"><div>Sam, the landlord · WhatsApp · 2 days</div><div class="sub">The meter photo</div></div>
+<div class="line"><div>Dana at Acme · Gmail · 1 day</div><div class="sub">The résumé</div></div>
+<div class="head">You are waiting on</div>
+<div class="line"><div>The plumber · WhatsApp · 2 days</div><div class="sub">A quote for the kitchen sink</div></div>
+</div>
+</div>
+<figcaption>The morning message on Tugboat's page, redrawn for this site with invented people and messages. The layout follows the real page; the wording is ours.</figcaption>
+</figure>
+<ul>
+<li><strong>At the top:</strong> a warning when one of your apps has not been copied recently. The message never reports
+“nothing new” when it simply could not see.</li>
+<li><strong>Then how much arrived,</strong> per app.</li>
+<li><strong>Then at most seven things that matter,</strong> each with one line on what it is and one on why.</li>
+<li><strong>Then two short lists:</strong> who is waiting on you, and who you are waiting on, with how long.</li>
+</ul>
+<p>A tap on any line opens the message it came from. <strong>Right</strong> and <strong>Wrong</strong> mark each judgment. Those marks
+are how you find out whether it picks the right things.</p>
+<p>“214 arrived, 6 matter” is the point. The other 208 are newsletters, receipts and notifications. They are
+counted, not listed.</p>
+<p>Since November 12 the same message also lists what is open, and which of those wait on you.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="a-card">A card</h2><a class="sl-anchor-link" href="#a-card"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “A card”</span></a></div>
+<p>When something needs you, it arrives as a card. This is the heart of it. Reply cards for email have run
+since November 12. This picture shows the full design:</p>
+<figure class="screen">
+<div class="frame">
+<div class="stamp">The design · invented data</div>
+<div class="msg">
+<div class="card-title">Reply to Dana at Acme?</div>
+<div class="aside"><strong>She wrote:</strong> "Could you send me your résumé before Thursday? Happy to set up a call after that."</div>
+<div class="aside"><strong>Why this reply:</strong> she asked by Thursday, and your résumé is in your files.</div>
+<div class="outgoing-label">What will be sent, exactly</div>
+<div class="fields"><span class="k">From</span><span class="v">you@yourwork.example</span><span class="k">To</span><span class="v">dana@acme.example</span><span class="k">Copy to</span><span class="v">nobody</span><span class="k">Subject</span><span class="v">Re: The operations role</span></div>
+<div class="outgoing">Hi Dana,
+Thank you for reaching out. My résumé is attached. I am free to talk on Tuesday or Wednesday afternoon.
+Best,
+Alex</div>
+<div class="sub">Attached: resume.pdf, 182 KB</div>
+<div class="btns"><span class="btn main">Send</span><span class="btn">Edit</span><span class="btn">Not now</span><span class="btn">No</span></div>
+</div>
+</div>
+<figcaption>A card as designed, with invented people and addresses. What she wrote and the reason are set apart from what will be sent. Today a tap opens Gmail with this reply filled in, and you press Send there. Sending from the card itself is built and switched off.</figcaption>
+</figure>
+<ul>
+<li><strong>Send:</strong> it goes out exactly as shown, once. (Today: it opens in Gmail, filled in, for you to send.)</li>
+<li><strong>Edit:</strong> you change the text. Your version becomes the one that can be sent.</li>
+<li><strong>Not now:</strong> it comes back at the next round-up, the summary it sends each morning and evening, or sooner if the deadline is close.</li>
+<li><strong>No:</strong> it is dropped, and you can say why in one tap. Those answers are how its judgment is measured.</li>
+</ul>
+<p>The card is drawn by the gateway, an ordinary program with no AI in it, from what the agent proposed. It shows
+which address the message goes from, every recipient in full, and the whole text. The agent cannot change a
+proposal after you have seen it, and it has no tool that sends.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="during-the-day">During the day</h2><a class="sl-anchor-link" href="#during-the-day"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “During the day”</span></a></div>
+<p>It stays quiet. It interrupts for three reasons only, and it says which one:</p>
+<ol>
+<li><strong>A deadline is close.</strong></li>
+<li><strong>A person is waiting on you,</strong> and has waited longer than is reasonable. (Designed; not yet on.)</li>
+<li><strong>Something you asked it to watch for has happened:</strong> “Your parcel has arrived.”</li>
+</ol>
+<p>Everything else waits for the next round-up. An assistant that is supposed to reduce the noise in your day
+must not add to it. It never interrupts at night, and at most five times a day. A thing you asked it to
+watch for is checked every half hour until it happens.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="when-you-talk-to-it">When you talk to it</h2><a class="sl-anchor-link" href="#when-you-talk-to-it"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “When you talk to it”</span></a></div>
+<p>You write to it on a web page, or dictate. You can ask it what you would ask a good assistant:</p>
+<ul>
+<li>“Who is waiting on me?”</li>
+<li>“What did the landlord say about the deposit?”</li>
+<li>“Remind me Friday about the insurance.”</li>
+<li>“Draft a reply to that.”</li>
+</ul>
+<p>A simple answer takes a few seconds. One that looks through your messages has taken between 4 and 20
+seconds. It looks things up in your own mail and messages, which it may read and may not
+change.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="1800-the-evening-list">18:00. The evening list</h2><a class="sl-anchor-link" href="#1800-the-evening-list"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “18:00. The evening list”</span></a></div>
+<blockquote>
+<p>Closed today: 4. Still open: 3. The insurance form waits on you (due Friday). The quote waits on the
+plumber, asked two days ago. The résumé went to Dana at 10:12; no answer yet.</p>
+</blockquote>
+<p>This list is made by the gateway itself, from its own record, with no AI involved. So it arrives even on a
+day when the AI is unavailable.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="if-the-computer-was-off">If the computer was off</h2><a class="sl-anchor-link" href="#if-the-computer-was-off"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “If the computer was off”</span></a></div>
+<p>When it is running again, it catches up once and tells you what it missed. It does not send one message per
+missed morning. This is built and has passed its tests; it has not yet been seen after a real power-off.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="what-of-this-exists-today">What of this exists today</h2><a class="sl-anchor-link" href="#what-of-this-exists-today"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “What of this exists today”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Part of the day</th>
+<th>State on November 16, 2026, for one person</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The morning message: how much arrived, what matters, who is waiting on whom, what is open</td>
+<td><strong>On</strong> since November 11</td>
+</tr>
+<tr>
+<td>Asking it about your mail and messages in the chat</td>
+<td><strong>On</strong></td>
+</tr>
+<tr>
+<td>Reading new messages as they come in, through the day and night, with a ping for what cannot wait</td>
+<td><strong>On</strong> since November 16</td>
+</tr>
+<tr>
+<td>The list of open items, the evening summary, interruptions for a close deadline, “watch for”</td>
+<td><strong>On</strong> since November 12</td>
+</tr>
+<tr>
+<td>Notices on the PC and on your phone, and the page on your phone</td>
+<td><strong>On</strong> since November 12</td>
+</tr>
+<tr>
+<td>It works the items that wait on it, twice a day</td>
+<td><strong>On</strong> since November 12</td>
+</tr>
+<tr>
+<td>Reply cards for email, opening in Gmail filled in</td>
+<td><strong>On</strong> since November 12</td>
+</tr>
+<tr>
+<td>Files it finds in your mail, attached to a reply</td>
+<td><strong>On</strong> since November 13. Not yet tried on a real message</td>
+</tr>
+<tr>
+<td>Catching up after the computer was off</td>
+<td><strong>Built and tested with stand-ins</strong></td>
+</tr>
+<tr>
+<td>Send from the card, after your tap</td>
+<td><strong>Built, switched off</strong></td>
+</tr>
+<tr>
+<td>An interruption when a person has waited too long</td>
+<td><strong>Designed</strong></td>
+</tr>
+<tr>
+<td>Voice messages, acting in a web browser up to the last click</td>
+<td><strong>Planned</strong></td>
+</tr>
+</tbody>
+</table>
+<aside aria-label="What we make" class="starlight-aside starlight-aside--tip"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path fill-rule="evenodd" d="M1.44 8.855v-.001l3.527-3.516c.34-.344.802-.541 1.285-.548h6.649l.947-.947c3.07-3.07 6.207-3.072 7.62-2.868a1.821 1.821 0 0 1 1.557 1.557c.204 1.413.203 4.55-2.868 7.62l-.946.946v6.649a1.845 1.845 0 0 1-.549 1.286l-3.516 3.528a1.844 1.844 0 0 1-3.11-.944l-.858-4.275-4.52-4.52-2.31-.463-1.964-.394A1.847 1.847 0 0 1 .98 10.693a1.843 1.843 0 0 1 .46-1.838Zm5.379 2.017-3.873-.776L6.32 6.733h4.638l-4.14 4.14Zm8.403-5.655c2.459-2.46 4.856-2.463 5.89-2.33.134 1.035.13 3.432-2.329 5.891l-6.71 6.71-3.561-3.56 6.71-6.711Zm-1.318 15.837-.776-3.873 4.14-4.14v4.639l-3.364 3.374Z" clip-rule="evenodd"/><path d="M9.318 18.345a.972.972 0 0 0-1.86-.561c-.482 1.435-1.687 2.204-2.934 2.619a8.22 8.22 0 0 1-1.23.302c.062-.365.157-.79.303-1.229.415-1.247 1.184-2.452 2.62-2.935a.971.971 0 1 0-.62-1.842c-.12.04-.236.084-.35.13-2.02.828-3.012 2.588-3.493 4.033a10.383 10.383 0 0 0-.51 2.845l-.001.016v.063c0 .536.434.972.97.972H2.24a7.21 7.21 0 0 0 .878-.065c.527-.063 1.248-.19 2.02-.447 1.445-.48 3.205-1.472 4.033-3.494a5.828 5.828 0 0 0 .147-.407Z"/></svg>What we make</p><div class="starlight-aside__content"><p>Tugboat is this assistant, running on your own computer, on your own AI plan. It works today for the person
+who builds it and is not installable by anyone else yet. <a href="/guide/kit/where-it-stands/">Where Tugboat stands</a> says
+exactly what works.</p></div></aside>
+<div class="sl-heading-wrapper level-h2"><h2 id="sources-and-dates">Sources and dates</h2><a class="sl-anchor-link" href="#sources-and-dates"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Sources and dates”</span></a></div>
+<ul>
+<li>The table describes what has run for one person on one Windows PC, switched on between November 11 and
+13, 2026. How well it judges over weeks of real mail is not measured yet.</li>
+<li>The card picture shows the full design, including sending from the card, which is not switched on.</li>
+<li>The examples are invented. No real message is quoted on this site.</li>
+</ul>
+</div><footer class="sl-flex astro-u6rkd2lx"><div class="meta sl-flex astro-u6rkd2lx"></div><div class="pagination-links print:hidden astro-q2h5ybd7" dir="ltr"><a href="/guide/start/what-an-ai-employee-is/" rel="prev" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span class="astro-q2h5ybd7">Previous<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">What an AI employee is</span></span></a><a href="/guide/start/glossary/" rel="next" class="astro-q2h5ybd7"><svg aria-hidden="true" class="astro-q2h5ybd7 astro-t4didigu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span class="astro-q2h5ybd7">Next<br class="astro-q2h5ybd7"><span class="link-title astro-q2h5ybd7">Glossary</span></span></a></div></footer></div></div></main></div></div></div></div></body></html>
