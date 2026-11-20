@@ -494,10 +494,16 @@ document.querySelectorAll('[data-join]').forEach(f => f.addEventListener('submit
 	d.append('entry.765420817', matchMedia('(max-width: 760px)').matches ? 'phone' : 'computer')
 	// Count the visit only once a person does something (scroll, mouse, touch, key). Link checkers and
 	// previewers load the page and run it, but never do these, so they are not counted.
+	// It also waits until the page has been open 2 seconds: on Nov 19 LinkedIn's link checker sent 4 "visits"
+	// in the same second, each with a new browser number.
 	const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+	const t0 = Date.now()
 	const send = () => {
 		events.forEach(e => removeEventListener(e, send, true))
-		try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+		setTimeout(() => {
+			if (document.visibilityState === 'hidden') return
+			try { fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNrJhDmcocQgchXlww7f_4qbJp6adWWpwGg-5LMCxfqk2dkA/formResponse', { method: 'POST', mode: 'no-cors', body: d, keepalive: true }) } catch {}
+		}, Math.max(0, 2000 - (Date.now() - t0)))
 	}
 	events.forEach(e => addEventListener(e, send, { capture: true, passive: true }))
 })()
