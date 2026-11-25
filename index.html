@@ -14,14 +14,14 @@
 <meta property="og:image" content="https://tugboat.bot/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A small red tugboat and the words: Tugboat does the work. You press Send.">
+<meta property="og:image:alt" content="The Tugboat logo, a winking tugboat robot, and the words: Tugboat does the work. You press Send.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tugboat does the work. You press Send.">
 <meta name="twitter:description" content="An AI assistant on your own computer. It reads your email and messages and gets the work ready, up to the last click.">
 <meta name="twitter:image" content="https://tugboat.bot/og.png">
 <meta name="theme-color" content="#f6f3ec">
 <meta name="google-site-verification" content="XdHv9OWRw_slfJ444UJZU1bxLJ0_u1eJFPotjZLQtPg">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,17 +48,17 @@
 <style>
 :root {
 	--bg: #f6f3ec; --panel: #fffdf8; --ink: #1d2733; --soft: #5b6573; --line: #e2dccf;
-	--hull: #c8432b; --cabin: #f2e6c9; --sea: #2f6f8f; --accent: #c8432b; --accent-ink: #fff; --ok: #2f8a5a;
+	--hull: #c8432b; --tb-k: #1d2733; --cabin: #f2e6c9; --sea: #2f6f8f; --accent: #c8432b; --accent-ink: #fff; --ok: #2f8a5a;
 	--font-head: 'Fraunces', Georgia, serif;
 	--font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
 	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
-	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
+	--tb-k: #4a5a6e; --cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
 } }
 :root[data-theme="dark"] {
 	--bg: #121820; --panel: #18202a; --ink: #ece7dc; --soft: #a2abb7; --line: #2a3442;
-	--cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
+	--tb-k: #4a5a6e; --cabin: #e9dcbc; --sea: #6fa9c6; --accent: #e8664c; --accent-ink: #121820; --ok: #5cbf8a; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
@@ -83,7 +83,7 @@ section { padding: 4rem 0; }
 .bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .bar .wrap { display: flex; align-items: center; gap: 1.5rem; height: 3.8rem; }
 .brand { display: flex; align-items: center; gap: 0.55rem; font: 700 1.2rem var(--font-head); color: var(--ink); text-decoration: none; }
-.brand svg { width: 38px; height: 38px; }
+.brand svg { width: 42px; height: 42px; }
 .bar nav { display: flex; gap: 1.3rem; margin-left: auto; font-size: 0.95rem; }
 .bar nav a { color: var(--soft); text-decoration: none; }
 .bar nav a:hover { color: var(--ink); }
@@ -195,22 +195,13 @@ footer .brand { margin-bottom: 0.5rem; }
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 	<defs>
-		<g id="tug">
-			<path d="M8 66 Q60 74 112 66" stroke="var(--sea)" stroke-width="4" fill="none" stroke-linecap="round"/>
-			<path d="M14 50 H106 L96 64 Q60 70 24 64 Z" fill="var(--hull)"/>
-			<rect x="38" y="28" width="38" height="22" rx="4" fill="var(--cabin)"/>
-			<rect x="62" y="12" width="9" height="16" rx="2" fill="var(--ink)"/>
-			<circle cx="50" cy="38" r="3" fill="#1d2733"/>
-			<circle cx="64" cy="38" r="3" fill="#1d2733"/>
-			<path d="M51 44 Q57 48 63 44" stroke="#1d2733" stroke-width="2" fill="none" stroke-linecap="round"/>
-			<circle cx="24" cy="57" r="3.2" fill="none" stroke="var(--cabin)" stroke-width="2"/>
-		</g>
+		<symbol id="tug" viewBox="0 0 120 120"><!-- the tug-bot logo (marketing/social/brand/tugbot.js in crew-kit) --><defs><filter id="glow-site" x="-60%" y="-120%" width="220%" height="340%"><feGaussianBlur stdDeviation="3.2"/></filter></defs><rect x="53" y="8" width="14" height="20" rx="2" fill="#c8432b"/><rect x="51" y="4" width="18" height="7" rx="2.5" fill="var(--tb-k)"/><rect x="12" y="41" width="12" height="24" rx="6" fill="var(--tb-k)"/><rect x="96" y="41" width="12" height="24" rx="6" fill="var(--tb-k)"/><rect x="21" y="26" width="78" height="50" rx="25" fill="#f2e6c9"/><rect x="30" y="36" width="60" height="30" rx="15" fill="#121820"/><rect x="39.5" y="43.5" width="15" height="15" rx="7.5" fill="#e8664c" opacity="1"/><circle cx="44.45" cy="48.45" r="2" fill="#fff" opacity="0.55"/><path d="M64.5 55 Q73 44 81.5 55" stroke="#e8664c" stroke-width="5.5" fill="none" stroke-linecap="round" opacity="1"/><rect x="14" y="74" width="92" height="10" rx="5" fill="var(--tb-k)"/><path d="M19 83 H101 Q97 100 60 104 Q23 100 19 83 Z" fill="#c8432b"/><path d="M-24 113 Q-18 107 -12 113 T0 113 Q6 107 12 113 T24 113 Q30 107 36 113 T48 113 Q54 107 60 113 T72 113 Q78 107 84 113 T96 113 Q102 107 108 113 T120 113 Q126 107 132 113 T144 113" stroke="#2f6f8f" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
 	</defs>
 </svg>
 
 <header class="bar">
 	<div class="wrap">
-		<a class="brand" href="#top" aria-label="Tugboat home"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
+		<a class="brand" href="#top" aria-label="Tugboat home"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
 		<nav aria-label="Sections">
 			<a href="#how">How it works</a>
 			<a href="#safety">Safety</a>
@@ -434,7 +425,7 @@ footer .brand { margin-bottom: 0.5rem; }
 <footer>
 	<div class="wrap">
 		<div>
-			<a class="brand" href="#top"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
+			<a class="brand" href="#top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#tug"/></svg>Tugboat</a>
 			<p>The AI assistant that does the work. You press Send.</p>
 			<p style="margin-top:0.6rem">© 2026 Tugboat · an independent open-source project</p>
 		</div>
